@@ -13,6 +13,7 @@ public class Patient {
     private ArrayList<FollowUpPeriod> followUpPeriods;
     private ArrayList<Boolean> isFollowedList;
     private ArrayList<String> followUpMarks = new ArrayList<>(Arrays.asList("FU7D", "FU1M", "FU6M", "FU1Y"));
+    private boolean needFollowUpToday;
     private boolean isTrialCompleted;
 
 
@@ -33,17 +34,49 @@ public class Patient {
         }
 
         isTrialCompleted = false;
+
+        needFollowUpToday = checkNeedFollowUpToday();
     }
 
-    public void markIsFollowed(String id, String mark) {
-        for (String followUpMark : followUpMarks) {
-            int count = 0;
-            if (mark == followUpMark) {
-                isFollowedList.set(count, true);
+    public boolean checkNeedFollowUpToday() {
+        LocalDate today = LocalDate.now();
+        ArrayList<Boolean> needFollowUp = new ArrayList<>();
+        for (FollowUpPeriod period : followUpPeriods) {
+            if (today.isBefore(period.getEndDate())
+                    && today.isAfter(period.getStartDate())
+                    && (period.checkIsCompleted() == false)) {
+                needFollowUp.add(true);
+            } else {
+                needFollowUp.add(false);
             }
-            count++;
         }
+        return needFollowUp.contains(true);
     }
+
+    public boolean isNeedFollowUpToday() {
+        return needFollowUpToday;
+    }
+
+    public FollowUpPeriod getCurrentPeriod() {
+        LocalDate today = LocalDate.now();
+        for (FollowUpPeriod period : followUpPeriods) {
+            if (today.isBefore(period.getEndDate())
+                    && today.isAfter(period.getStartDate())) {
+                return period;
+            }
+        }
+        return null;
+    }
+
+    public String printFollowUpPeriod() {
+        String result = "";
+        for (FollowUpPeriod period : followUpPeriods) {
+            String str = period.printPeriod() + "\n";
+            result += str;
+        }
+        return result;
+    }
+
 
     public String getPatientId() {
         return patientId;

@@ -24,6 +24,7 @@ public class ClinicalTrial {
 
     }
 
+    //input might be null
     public void removePatient(Patient patient) {
         if (patientList.contains(patient)) {
             patientList.remove(patient);
@@ -35,13 +36,26 @@ public class ClinicalTrial {
 
     public Patient findPatient(String id) {
         for (Patient p : patientList) {
-            if (p.getPatientId() == id) {
+            if (p.getPatientId().equals(id)) {
                 return p;
             }
         }
         return null;
     }
 
+    public ArrayList<Patient> getFollowUpList() {
+        ArrayList<Patient> followUpList = new ArrayList<>();
+        for (Patient p : patientList) {
+            if (p.isNeedFollowUpToday()) {
+                followUpList.add(p);
+            }
+        }
+        return followUpList;
+    }
+
+    public ArrayList<Patient> getPatientList() {
+        return patientList;
+    }
 
     public int getPatientNum() {
         return patientList.size();
