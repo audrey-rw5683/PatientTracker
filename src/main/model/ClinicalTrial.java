@@ -4,13 +4,11 @@ import java.util.ArrayList;
 
 public class ClinicalTrial {
     private String trialName;
-    private int patientTarget;
     private ArrayList<Patient> patientList;
 
-    public ClinicalTrial(String trialName, int patientTarget) {
+    public ClinicalTrial(String trialName) {
         this.trialName = trialName;
-        this.patientTarget = patientTarget;
-        patientList = new ArrayList<>(patientTarget);
+        patientList = new ArrayList<>();
     }
 
     public void addPatient(Patient patient) {
@@ -53,6 +51,25 @@ public class ClinicalTrial {
         return followUpList;
     }
 
+    public int getFollowUpNum() {
+        return getFollowUpList().size();
+    }
+
+    public int getCompletedNum() {
+        return getCompletedList().size();
+    }
+
+    public ArrayList<Patient> getCompletedList() {
+        ArrayList<Patient> completedList = new ArrayList<>();
+        for (Patient p : getPatientList()) {
+            if (p.isTrialCompleted()) {
+                completedList.add(p);
+            }
+        }
+        return completedList;
+    }
+
+
     public ArrayList<Patient> getPatientList() {
         return patientList;
     }
@@ -63,9 +80,5 @@ public class ClinicalTrial {
 
     public String getTrialName() {
         return trialName;
-    }
-
-    public void setTrialName(String trialName) {
-        this.trialName = trialName;
     }
 }

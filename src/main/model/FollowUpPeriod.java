@@ -35,7 +35,7 @@ public class FollowUpPeriod {
     }
 
     public String printPeriod() {
-        String str = "From: " + getStartDate() + " to " + getEndDate() + ". Is complete? " + checkIsCompleted();
+        String str = "From: " + getStartDate() + " to " + getEndDate() + ". Is complete? " + checkIsFollowed();
         return str;
     }
 
@@ -47,11 +47,11 @@ public class FollowUpPeriod {
         return endDate;
     }
 
-    public boolean checkIsCompleted() {
+    public boolean checkIsFollowed() {
         return isFollowed;
     }
 
-    public void markFollowed() {
+    public void setFollowed() {
         isFollowed = true;
     }
 }

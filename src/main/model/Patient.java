@@ -14,7 +14,7 @@ public class Patient {
     private ArrayList<Boolean> isFollowedList;
     private ArrayList<String> followUpMarks = new ArrayList<>(Arrays.asList("FU7D", "FU1M", "FU6M", "FU1Y"));
     private boolean needFollowUpToday;
-    private boolean isTrialCompleted;
+    private boolean trialCompleted;
 
 
     public Patient(String patientId, char gender, int age, LocalDate operationDate) {
@@ -23,19 +23,33 @@ public class Patient {
         this.age = age;
         this.operationDate = operationDate;
 
-        isFollowedList = new ArrayList<>(4);
-        for (int i = 0; i < 4; i++) {
-            this.isFollowedList.add(false);
-        }
+//        isFollowedList = new ArrayList<>(4);
+//        for (int i = 0; i < 4; i++) {
+//            this.isFollowedList.add(false);
+//        }
 
         followUpPeriods = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             this.followUpPeriods.add(new FollowUpPeriod(followUpMarks.get(i), operationDate));
         }
 
-        isTrialCompleted = false;
+        trialCompleted = false;
 
         needFollowUpToday = checkNeedFollowUpToday();
+    }
+
+    public boolean isTrialCompleted() {
+        return trialCompleted;
+    }
+
+    public void checkTrialCompleted() {
+        for (FollowUpPeriod period : followUpPeriods) {
+            if (!period.checkIsFollowed()) {
+                trialCompleted = false;
+            } else {
+                trialCompleted = true;
+            }
+        }
     }
 
     public boolean checkNeedFollowUpToday() {
@@ -44,7 +58,7 @@ public class Patient {
         for (FollowUpPeriod period : followUpPeriods) {
             if (today.isBefore(period.getEndDate())
                     && today.isAfter(period.getStartDate())
-                    && (period.checkIsCompleted() == false)) {
+                    && (!period.checkIsFollowed())) {
                 needFollowUp.add(true);
             } else {
                 needFollowUp.add(false);
@@ -55,6 +69,10 @@ public class Patient {
 
     public boolean isNeedFollowUpToday() {
         return needFollowUpToday;
+    }
+
+    public void markFollowed(int index) {
+        getFollowUpPeriods().get(index - 1).setFollowed();
     }
 
     public FollowUpPeriod getCurrentPeriod() {
@@ -68,7 +86,7 @@ public class Patient {
         return null;
     }
 
-    public String printFollowUpPeriod() {
+    public String printFollowUpPeriods() {
         String result = "";
         for (FollowUpPeriod period : followUpPeriods) {
             String str = period.printPeriod() + "\n";
@@ -77,12 +95,33 @@ public class Patient {
         return result;
     }
 
+    public ArrayList<FollowUpPeriod> getFollowUpPeriods() {
+        return followUpPeriods;
+    }
 
     public String getPatientId() {
         return patientId;
     }
 
-    public void setTrialCompleted(boolean trialCompleted) {
-        isTrialCompleted = trialCompleted;
+    public int getAge() {
+        return age;
     }
+
+    public ArrayList<String> getFollowUpMarks() {
+        return followUpMarks;
+    }
+
+    public ArrayList<Boolean> getIsFollowedList() {
+        return isFollowedList;
+    }
+
+    public LocalDate getOperationDate() {
+        return operationDate;
+    }
+
+    public char getGender() {
+        return gender;
+    }
+
+
 }

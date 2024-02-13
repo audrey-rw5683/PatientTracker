@@ -8,18 +8,88 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PatientTest {
-    private Patient p1;
-    private Patient p2;
+    private Patient patient1;
+    private Patient patient2;
+    private LocalDate today;
+    private FollowUpPeriod fup1;
+    private FollowUpPeriod fup2;
+    private FollowUpPeriod fup3;
+    private FollowUpPeriod fup4;
 
     @BeforeEach
     void setup () {
-        p1 = new Patient("001", 'F', 28, LocalDate.of(2024, 2, 10));
-        p2 = new Patient("002", 'M', 28, LocalDate.of(2024, 1, 10));
+        today = LocalDate.now();
+        patient1 = new Patient("001", 'F', 28, today.minusDays(3));
+        patient2 = new Patient("002", 'M', 65, today.minusDays(500));
+        fup1 = new FollowUpPeriod("FU7D", today.minusDays(3));
+        fup2 = new FollowUpPeriod("FU1M", today.minusDays(3));
+        fup3 = new FollowUpPeriod("FU6M", today.minusDays(3));
+        fup4 = new FollowUpPeriod("FU1Y", today.minusDays(3));
     }
 
     @Test
-    void constructorTest() {
-        p1.getCurrentPeriod().markFollowed();
-        assertTrue(p1.getCurrentPeriod().checkIsCompleted());
+    void testConstructor() {
+        assertEquals("001", patient1.getPatientId());
+        assertEquals('F', patient1.getGender());
+        assertEquals(28, patient1.getAge());
+        assertEquals(today.minusDays(3), patient1.getOperationDate());
+        assertEquals(4, patient1.getIsFollowedList().size());
+        assertFalse(patient1.getIsFollowedList().contains(true));
+        assertEquals("FU7D", patient1.getFollowUpMarks().get(0));
+        assertEquals("FU1M", patient1.getFollowUpMarks().get(1));
+        assertEquals("FU6M", patient1.getFollowUpMarks().get(2));
+        assertEquals("FU1Y", patient1.getFollowUpMarks().get(3));
+        assertFalse(patient1.isTrialCompleted());
+        assertTrue(patient1.isNeedFollowUpToday());
+        assertFalse(patient2.isNeedFollowUpToday());
+        assertEquals(fup1.printPeriod(),patient1.getFollowUpPeriods().get(0).printPeriod());
+        assertEquals(fup2.printPeriod(),patient1.getFollowUpPeriods().get(1).printPeriod());
+        assertEquals(fup3.printPeriod(),patient1.getFollowUpPeriods().get(2).printPeriod());
+        assertEquals(fup4.printPeriod(),patient1.getFollowUpPeriods().get(3).printPeriod());
+//        assertFalse(patient1.getIsFollowedList().get(0));
+//        assertFalse(patient1.getIsFollowedList().get(1));
+//        assertFalse(patient1.getIsFollowedList().get(2));
+//        assertFalse(patient1.getIsFollowedList().get(3));
+    }
+
+    @Test
+    public void testIsTrialCompleted() {
+        assertFalse(patient1.isTrialCompleted());
+        for (FollowUpPeriod period : patient1.getFollowUpPeriods()) {
+            period.setFollowed();
+        }
+        patient1.checkTrialCompleted();
+        assertTrue(patient1.isTrialCompleted());
+        patient2.getFollowUpPeriods().get(1).setFollowed();
+        assertFalse(patient2.isTrialCompleted());
+    }
+
+    @Test
+    public void testCheckNeedFollowUpToday() {
+        assertTrue(patient1.checkNeedFollowUpToday());
+        assertFalse(patient2.checkNeedFollowUpToday());
+    }
+
+
+    @Test
+    void markFollowed() {
+        assertFalse(patient1.getFollowUpPeriods().get(0).checkIsFollowed());
+        patient1.markFollowed(1);
+        assertTrue(patient1.getFollowUpPeriods().get(0).checkIsFollowed());
+    }
+
+    @Test
+    void getCurrentPeriod() {
+        assertEquals(fup1.printPeriod(), patient1.getCurrentPeriod().printPeriod());
+        assertNull(patient2.getCurrentPeriod());
+    }
+
+    @Test
+    void printFollowUpPeriods() {
+        String expectedOutput = fup1.printPeriod() + "\n"
+                + fup2.printPeriod() + "\n"
+                + fup3.printPeriod() + "\n"
+                + fup4.printPeriod() + "\n";
+        assertEquals(expectedOutput, patient1.printFollowUpPeriods());
     }
 }

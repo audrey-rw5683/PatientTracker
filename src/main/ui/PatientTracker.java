@@ -11,7 +11,6 @@ public class PatientTracker {
     Scanner scanner = new Scanner(System.in);
     ClinicalTrial currentTrial;
     LocalDate today;
-    private Patient p1;
 
     public PatientTracker() {
         init();
@@ -20,8 +19,8 @@ public class PatientTracker {
 
     public void init() {
         today = LocalDate.now();
-        this.currentTrial = new ClinicalTrial("currentTrial", 50);
-        p1 = new Patient("001", 'F', 28, LocalDate.of(2024, 2, 10));
+        this.currentTrial = new ClinicalTrial("currentTrial");
+        Patient p1 = new Patient("001", 'F', 28, LocalDate.of(2024, 2, 10));
         currentTrial.addPatient(p1);
     }
 
@@ -42,12 +41,12 @@ public class PatientTracker {
         System.out.println("4. Back");
     }
 
-    public void displayFollowUpPeriod() {
-        System.out.println("Choose one followup period: ");
-        System.out.println("1. Post-operation 1-7 days");
-        System.out.println("2. Post-operation 23-37 days");
-        System.out.println("3. Post-operation 150-210 days");
-        System.out.println("4. Post-operation 330-360 days");
+    public void displayFollowUpPeriod(Patient patient) {
+        System.out.println("Choose one followup period as completed: ");
+        System.out.println("1. Post-operation 1-7 days" + patient.getFollowUpPeriods().get(0).printPeriod());
+        System.out.println("2. Post-operation 23-37 days" + patient.getFollowUpPeriods().get(1).printPeriod());
+        System.out.println("3. Post-operation 150-210 days" + patient.getFollowUpPeriods().get(2).printPeriod());
+        System.out.println("4. Post-operation 330-360 days" + patient.getFollowUpPeriods().get(3).printPeriod());
     }
 
     public void runPatientTracker() {
@@ -123,8 +122,13 @@ public class PatientTracker {
         String id = scanner.nextLine();
         Patient targetPatient = currentTrial.findPatient(id);
         if (targetPatient != null && targetPatient.getCurrentPeriod() != null) {
-            targetPatient.getCurrentPeriod().markFollowed();
+            System.out.println("Patient History: ");
+            displayFollowUpPeriod(targetPatient);
+            int index = scanner.nextInt();
+            targetPatient.markFollowed(index);
             System.out.println("Follow-up marked as completed for patient " + id);
+            System.out.println("Patient History: ");
+            displayFollowUpPeriod(targetPatient);
         } else {
             System.out.println("Patient not found or no current follow-up period available.");
         }
@@ -148,12 +152,14 @@ public class PatientTracker {
 
     public void doCurrentStatus() {
         System.out.println("Clinical Trial Name: " + currentTrial.getTrialName());
-        System.out.println("The Number of Patients: " + currentTrial.getPatientNum());
+        System.out.println("The Number of all patients: " + currentTrial.getPatientNum());
+        System.out.println("The Number of patients who need follow-up: " + currentTrial.getFollowUpNum());
+        System.out.println("The Number of patients who has completed this trial: " + currentTrial.getCompletedNum());
         System.out.println("Today is: " + today);
         ArrayList<Patient> allPatient = currentTrial.getPatientList();
         for (Patient p : allPatient) {
             System.out.println(p.getPatientId());
-            System.out.println(p.printFollowUpPeriod());
+            System.out.println(p.printFollowUpPeriods());
         }
     }
 }

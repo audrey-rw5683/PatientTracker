@@ -16,7 +16,7 @@ public class ClinicalTrialTest {
     void setup () {
         p1 = new Patient("001", 'F', 28, LocalDate.of(2024, 2, 10));
         p2 = new Patient("002", 'M', 28, LocalDate.of(2024, 1, 10));
-        testTrial = new ClinicalTrial("trial1", 50);
+        testTrial = new ClinicalTrial("trial1");
     }
 
     @Test
