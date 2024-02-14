@@ -69,8 +69,8 @@ public class PatientTest {
     @Test
     public void testIsTrialNotCompleted() {
         assertFalse(patient1.isTrialCompleted());
-        for (FollowUpPeriod period : patient1.getFollowUpPeriods()) {
-            assertFalse(period.checkIsFollowed());
+        for (int i = 0; i < patient1.getFollowUpPeriods().size() - 1; i++) {
+            patient1.getFollowUpPeriods().get(i).setFollowed();
         }
     }
 

@@ -8,6 +8,7 @@ public class FollowUpPeriod {
     private LocalDate endDate;
     private boolean isFollowed;
 
+
     public FollowUpPeriod(String followUpMark, LocalDate operationDate) {
         //this.followUpMark = followUpMark;
         switch (followUpMark) {

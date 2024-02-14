@@ -24,6 +24,35 @@ public class FollowUpPeriodTest {
     }
 
     @Test
+    void testConstructor1 () {
+        assertEquals(operationDate.plusDays(1), periodFU7D.getStartDate());
+        assertEquals(operationDate.plusDays(7), periodFU7D.getEndDate());
+        assertFalse(periodFU7D.checkIsFollowed());
+    }
+
+    @Test
+    void testConstructor2 () {
+        assertEquals(operationDate.plusDays(23), periodFU1M.getStartDate());
+        assertEquals(operationDate.plusDays(37), periodFU1M.getEndDate());
+        assertFalse(periodFU1M.checkIsFollowed());
+    }
+
+    @Test
+    void testConstructor3 () {
+        assertEquals(operationDate.plusDays(150), periodFU6M.getStartDate());
+        assertEquals(operationDate.plusDays(210), periodFU6M.getEndDate());
+        assertFalse(periodFU6M.checkIsFollowed());
+
+    }
+
+    @Test
+    void testConstructor4 () {
+        assertEquals(operationDate.plusDays(330), periodFU1Y.getStartDate());
+        assertEquals(operationDate.plusDays(390), periodFU1Y.getEndDate());
+        assertFalse(periodFU1Y.checkIsFollowed());
+    }
+
+    @Test
     public void testPrintPeriod() {
         String expectedFU7D = "From: 2023-02-02 to 2023-02-08. Is complete? false";
         String expectedFU1M = "From: 2023-02-24 to 2023-03-10. Is complete? false";
