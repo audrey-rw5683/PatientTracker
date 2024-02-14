@@ -53,6 +53,14 @@ public class FollowUpPeriodTest {
     }
 
     @Test
+    void testConstructorInvalid () {
+        FollowUpPeriod periodInvalid = new FollowUpPeriod("Invalid", operationDate);
+        assertNull(periodInvalid.getStartDate());
+        assertNull(periodInvalid.getEndDate());
+        assertFalse(periodInvalid.checkIsFollowed());
+    }
+
+    @Test
     public void testPrintPeriod() {
         String expectedFU7D = "From: 2023-02-02 to 2023-02-08. Is complete? false";
         String expectedFU1M = "From: 2023-02-24 to 2023-03-10. Is complete? false";

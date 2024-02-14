@@ -75,7 +75,7 @@ public class ClinicalTrialTest {
     }
 
     @Test
-    void testFindatient() {
+    void testFindPatient() {
         assertNull(testTrial.findPatient("001"));
         testTrial.addPatient(patient1);
         testTrial.addPatient(patient2);

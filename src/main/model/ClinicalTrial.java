@@ -6,6 +6,8 @@ public class ClinicalTrial {
     private String trialName;
     private ArrayList<Patient> patientList;
 
+
+    //EFFECTS:
     public ClinicalTrial(String trialName) {
         this.trialName = trialName;
         patientList = new ArrayList<>();

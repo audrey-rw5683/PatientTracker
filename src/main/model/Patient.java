@@ -16,7 +16,9 @@ public class Patient {
     private boolean needFollowUpToday;
     private boolean trialCompleted;
 
-
+    //EFFECTS: constructs a patient with id, gender, age and operation date
+    //generates a list of follow-up periods according to the operation date
+    //The patient has not completed the trial by default
     public Patient(String patientId, char gender, int age, LocalDate operationDate) {
         this.patientId = patientId;
         this.gender = gender;
@@ -38,10 +40,9 @@ public class Patient {
         needFollowUpToday = checkNeedFollowUpToday();
     }
 
-    public boolean isTrialCompleted() {
-        return trialCompleted;
-    }
 
+    //MODIFIES: this
+    //EFFECTS: when each period is followed, the trial is completed
     public void checkTrialCompleted() {
         for (FollowUpPeriod period : followUpPeriods) {
             if (!period.checkIsFollowed()) {
@@ -52,6 +53,8 @@ public class Patient {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: when today is in one of periods, the patient needs a follow-up
     public boolean checkNeedFollowUpToday() {
         LocalDate today = LocalDate.now();
         ArrayList<Boolean> needFollowUp = new ArrayList<>();
@@ -67,14 +70,16 @@ public class Patient {
         return needFollowUp.contains(true);
     }
 
-    public boolean isNeedFollowUpToday() {
-        return needFollowUpToday;
-    }
 
+    //MODIFIES: this
+    //EFFECTS: choose from 1 to 4 in the console menu, set one period as followed
     public void markFollowed(int index) {
         getFollowUpPeriods().get(index - 1).setFollowed();
     }
 
+
+
+    //EFFECTS: gets the current period where today is in
     public FollowUpPeriod getCurrentPeriod() {
         LocalDate today = LocalDate.now();
         for (FollowUpPeriod period : followUpPeriods) {
@@ -86,6 +91,8 @@ public class Patient {
         return null;
     }
 
+
+    //EFFECTS: generates a patient's all follow-up periods
     public String printFollowUpPeriods() {
         String result = "";
         for (FollowUpPeriod period : followUpPeriods) {
@@ -93,6 +100,14 @@ public class Patient {
             result += str;
         }
         return result;
+    }
+
+    public boolean isNeedFollowUpToday() {
+        return needFollowUpToday;
+    }
+
+    public boolean isTrialCompleted() {
+        return trialCompleted;
     }
 
     public ArrayList<FollowUpPeriod> getFollowUpPeriods() {

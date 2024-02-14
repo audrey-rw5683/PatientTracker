@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PatientTest {
     private Patient patient1;
     private Patient patient2;
+    private Patient patient3;
     private LocalDate today;
     private FollowUpPeriod fup1;
     private FollowUpPeriod fup2;
@@ -21,6 +22,7 @@ public class PatientTest {
         today = LocalDate.now();
         patient1 = new Patient("001", 'F', 28, today.minusDays(3));
         patient2 = new Patient("002", 'M', 65, today.minusDays(500));
+        patient3 = new Patient("003", 'F', 57, today.plusDays(1000));
         fup1 = new FollowUpPeriod("FU7D", today.minusDays(3));
         fup2 = new FollowUpPeriod("FU1M", today.minusDays(3));
         fup3 = new FollowUpPeriod("FU6M", today.minusDays(3));
@@ -72,11 +74,15 @@ public class PatientTest {
         for (int i = 0; i < patient1.getFollowUpPeriods().size() - 1; i++) {
             patient1.getFollowUpPeriods().get(i).setFollowed();
         }
+        patient1.checkTrialCompleted();
+        assertFalse(patient2.isTrialCompleted());
     }
 
     @Test
     public void testCheckNeedFollowUpToday() {
         assertTrue(patient1.checkNeedFollowUpToday());
+        patient1.getCurrentPeriod().setFollowed();
+        assertFalse(patient1.checkNeedFollowUpToday());
         assertFalse(patient2.checkNeedFollowUpToday());
     }
 
@@ -92,6 +98,7 @@ public class PatientTest {
     void testGetCurrentPeriod() {
         assertEquals(fup1.printPeriod(), patient1.getCurrentPeriod().printPeriod());
         assertNull(patient2.getCurrentPeriod());
+        assertNull(patient3.getCurrentPeriod());
     }
 
     @Test

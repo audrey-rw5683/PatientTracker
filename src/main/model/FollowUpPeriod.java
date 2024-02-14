@@ -8,7 +8,11 @@ public class FollowUpPeriod {
     private LocalDate endDate;
     private boolean isFollowed;
 
-
+    //EFFECTS: makes a follow-up period according to the mark and operation date
+    //if mark is FU7D, the follow-up period is post-operation 1-7 days
+    //if mark is FU1M, the follow-up period is post-operation 23-37 days
+    //if mark is FU6M, the follow-up period is post-operation 150-210 days
+    //if mark is FU1Y, the follow-up period is post-operation 330-390 days
     public FollowUpPeriod(String followUpMark, LocalDate operationDate) {
         //this.followUpMark = followUpMark;
         switch (followUpMark) {
@@ -35,22 +39,28 @@ public class FollowUpPeriod {
         }
     }
 
+    //EFFECTS: produces a line containing follow-up start date, end date and completion status
     public String printPeriod() {
         return "From: " + getStartDate() + " to " + getEndDate() + ". Is complete? " + checkIsFollowed();
     }
 
+    //EFFECTS: produces the follow-up start date
     public LocalDate getStartDate() {
         return startDate;
     }
 
+    //EFFECTS: produces the follow-up end date
     public LocalDate getEndDate() {
         return endDate;
     }
 
+    //EFFECTS: produces the follow-up status
     public boolean checkIsFollowed() {
         return isFollowed;
     }
 
+    //MODIFIES: this
+    //EFFECTS: mark the period as followed
     public void setFollowed() {
         isFollowed = true;
     }
