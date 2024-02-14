@@ -19,12 +19,10 @@ the data obtained is of higher quality, and the results of clinical trials are m
 
 ## User Stories
 
-- As a user, I want to be able to add a patient to the clinical trial 
-and specify the patient's id, age and enrollment date
-- As a user, I want to be able to view the list of patients in the clinical trial
-- As a user, I want to be able to see the series of planned follow-up times of the patient selected
-- As a user, I want to be able to mark a patient as followed-up or completed in the clinical trial
-- As a user, I want to be able to modify the patient's age, gender and enrollment date
-- As a user, I want to be able to remove a patient out of the clinical trial
-- As a user, I want to be able to see the number of patients in my clinical trial, 
-the number of patients that have been followed up and the number of patients that have completed this trial
+- As a user, I want to be able to add a patient to the clinical trial and specify the patient's id, age and enrollment date (complete)
+- As a user, I want to be able to see the series of planned follow-up times of the patient selected (complete)
+- As a user, I want to be able to mark a patient as followed-up or completed in the clinical trial (complete)
+- As a user, I want to be able to remove a patient out of the clinical trial (complete)
+- As a user, I want to be able to view the list of patients in the clinical trial (complete)
+- As a user, I want to be able to modify the patient's age, gender and enrollment date （to be implemented)
+- As a user, I want to be able to see the number of all patients in my clinical trial, the number of patients that have been followed up and the number of patients that have completed this trial (complete)
