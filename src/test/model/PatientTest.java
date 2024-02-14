@@ -33,8 +33,8 @@ public class PatientTest {
         assertEquals('F', patient1.getGender());
         assertEquals(28, patient1.getAge());
         assertEquals(today.minusDays(3), patient1.getOperationDate());
-        assertEquals(4, patient1.getIsFollowedList().size());
-        assertFalse(patient1.getIsFollowedList().contains(true));
+//        assertEquals(4, patient1.getIsFollowedList().size());
+//        assertFalse(patient1.getIsFollowedList().contains(true));
         assertEquals("FU7D", patient1.getFollowUpMarks().get(0));
         assertEquals("FU1M", patient1.getFollowUpMarks().get(1));
         assertEquals("FU6M", patient1.getFollowUpMarks().get(2));
@@ -60,8 +60,18 @@ public class PatientTest {
         }
         patient1.checkTrialCompleted();
         assertTrue(patient1.isTrialCompleted());
+        assertFalse(patient2.getFollowUpPeriods().get(0).checkIsFollowed());
+        assertFalse(patient2.isTrialCompleted());
         patient2.getFollowUpPeriods().get(1).setFollowed();
         assertFalse(patient2.isTrialCompleted());
+    }
+
+    @Test
+    public void testIsTrialNotCompleted() {
+        assertFalse(patient1.isTrialCompleted());
+        for (FollowUpPeriod period : patient1.getFollowUpPeriods()) {
+            assertFalse(period.checkIsFollowed());
+        }
     }
 
     @Test
@@ -72,24 +82,32 @@ public class PatientTest {
 
 
     @Test
-    void markFollowed() {
+    void testMarkFollowed() {
         assertFalse(patient1.getFollowUpPeriods().get(0).checkIsFollowed());
         patient1.markFollowed(1);
         assertTrue(patient1.getFollowUpPeriods().get(0).checkIsFollowed());
     }
 
     @Test
-    void getCurrentPeriod() {
+    void testGetCurrentPeriod() {
         assertEquals(fup1.printPeriod(), patient1.getCurrentPeriod().printPeriod());
         assertNull(patient2.getCurrentPeriod());
     }
 
     @Test
-    void printFollowUpPeriods() {
+    void testPrintFollowUpPeriods() {
         String expectedOutput = fup1.printPeriod() + "\n"
                 + fup2.printPeriod() + "\n"
                 + fup3.printPeriod() + "\n"
                 + fup4.printPeriod() + "\n";
         assertEquals(expectedOutput, patient1.printFollowUpPeriods());
+    }
+
+    @Test
+    void testGetFollowUpMarks() {
+        assertEquals("FU7D", patient1.getFollowUpMarks().get(0));
+        assertEquals("FU1M", patient1.getFollowUpMarks().get(1));
+        assertEquals("FU6M", patient1.getFollowUpMarks().get(2));
+        assertEquals("FU1Y", patient1.getFollowUpMarks().get(3));
     }
 }

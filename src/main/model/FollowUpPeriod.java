@@ -3,13 +3,13 @@ package model;
 import java.time.LocalDate;
 
 public class FollowUpPeriod {
-    private String followUpMark;
+    //private String followUpMark;
     private LocalDate startDate;
     private LocalDate endDate;
     private boolean isFollowed;
 
     public FollowUpPeriod(String followUpMark, LocalDate operationDate) {
-        this.followUpMark = followUpMark;
+        //this.followUpMark = followUpMark;
         switch (followUpMark) {
             case "FU7D":
                 startDate = operationDate.plusDays(1);
@@ -35,8 +35,7 @@ public class FollowUpPeriod {
     }
 
     public String printPeriod() {
-        String str = "From: " + getStartDate() + " to " + getEndDate() + ". Is complete? " + checkIsFollowed();
-        return str;
+        return "From: " + getStartDate() + " to " + getEndDate() + ". Is complete? " + checkIsFollowed();
     }
 
     public LocalDate getStartDate() {
