@@ -6,14 +6,14 @@ import java.util.Arrays;
 
 
 public class Patient {
-    private String patientId;
-    private char gender;
-    private int age;
-    private LocalDate operationDate;
-    private ArrayList<FollowUpPeriod> followUpPeriods;
-    private ArrayList<Boolean> isFollowedList;
-    private ArrayList<String> followUpMarks = new ArrayList<>(Arrays.asList("FU7D", "FU1M", "FU6M", "FU1Y"));
-    private boolean needFollowUpToday;
+    private final String patientId;
+    private final char gender;
+    private final int age;
+    private final LocalDate operationDate;
+    private final ArrayList<FollowUpPeriod> followUpPeriods;
+    private final ArrayList<Boolean> isFollowedList;
+    private final ArrayList<String> followUpMarks = new ArrayList<>(Arrays.asList("FU7D", "FU1M", "FU6M", "FU1Y"));
+    private final boolean needFollowUpToday;
     private boolean trialCompleted;
 
     //EFFECTS: constructs a patient with id, gender, age and operation date
@@ -94,12 +94,12 @@ public class Patient {
 
     //EFFECTS: generates a patient's all follow-up periods
     public String printFollowUpPeriods() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (FollowUpPeriod period : followUpPeriods) {
             String str = period.printPeriod() + "\n";
-            result += str;
+            result.append(str);
         }
-        return result;
+        return result.toString();
     }
 
     public boolean isNeedFollowUpToday() {

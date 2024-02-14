@@ -3,8 +3,8 @@ package model;
 import java.util.ArrayList;
 
 public class ClinicalTrial {
-    private String trialName;
-    private ArrayList<Patient> patientList;
+    private final String trialName;
+    private final ArrayList<Patient> patientList;
 
 
     //EFFECTS: constructs a clinical trial with a name and a patient list
@@ -19,9 +19,6 @@ public class ClinicalTrial {
     public void addPatient(Patient patient) {
         if (null == findPatient(patient.getPatientId())) {
             patientList.add(patient);
-            System.out.println("The patient is added successfully!");
-        } else {
-            System.out.println("Same patient id, this patient is already in the list!");
         }
     }
 
@@ -29,11 +26,8 @@ public class ClinicalTrial {
     //EFFECTS: remove the patient from the patient list
     // do nothing when the patient is not in the list
     public void removePatient(Patient patient) {
-        if (null != findPatient(patient.getPatientId()))  {
+        if (null != findPatient(patient.getPatientId())) {
             patientList.remove(patient);
-            System.out.println("The patient is removed successfully!");
-        } else {
-            System.out.println("Cannot find this patient");
         }
     }
 

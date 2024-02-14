@@ -134,6 +134,10 @@ public class PatientTracker {
     public void doAddPatient() {
         System.out.print("\nEnter patient ID: ");
         String id = scanner.nextLine();
+        if (currentTrial.findPatient(id) != null) {
+            System.out.println("Patient with ID " + id + " already exists.");
+            doManagement();
+        }
         System.out.print("Enter patient gender (M/F): ");
         char gender = scanner.nextLine().charAt(0);
         System.out.print("Enter patient age (0-100): ");
@@ -149,6 +153,7 @@ public class PatientTracker {
         LocalDate operationDate = LocalDate.of(year, month, day);
         Patient newPatient = new Patient(id, gender, age, operationDate);
         currentTrial.addPatient(newPatient);
+        System.out.println("The patient is added successfully!");
     }
 
     // MODIFIES: this
@@ -156,6 +161,10 @@ public class PatientTracker {
     public void doFollowUp() {
         System.out.print("\nEnter patient ID: ");
         String id = scanner.nextLine();
+        if (currentTrial.findPatient(id) == null) {
+            System.out.println("Cannot find this patient");
+            doManagement();
+        }
         Patient targetPatient = currentTrial.findPatient(id);
         if (targetPatient != null) {
             System.out.println("Patient History: ");
@@ -179,12 +188,18 @@ public class PatientTracker {
     public void doRemovePatient() {
         System.out.print("\nEnter patient ID: ");
         String id = scanner.nextLine();
+        if (currentTrial.findPatient(id) == null) {
+            System.out.println("Cannot find this patient");
+            doManagement();
+        }
         Patient targetPatient = currentTrial.findPatient(id);
         currentTrial.removePatient(targetPatient);
+        System.out.println("This patient is removed successfully!");
     }
 
     // MODIFIES: this
-    // EFFECTS: displays a list of patients who needs follow-up today
+    // EFFECTS: only displays a list of patients who needs follow-up today
+    // patients who missed follow-up won't show up here
     public void doReminder() {
         ArrayList<Patient> patientsToday = currentTrial.getFollowUpList();
         System.out.println("\nFollow up list: ");
@@ -199,7 +214,7 @@ public class PatientTracker {
     public void doCurrentStatus() {
         System.out.println("\nClinical Trial Name: " + currentTrial.getTrialName());
         System.out.println("The Number of all patients: " + currentTrial.getPatientNum());
-        System.out.println("The Number of patients who need follow-up: " + currentTrial.getFollowUpNum());
+        System.out.println("The Number of patients who need follow-up today: " + currentTrial.getFollowUpNum());
         System.out.println("The Number of patients who has completed this trial: " + currentTrial.getCompletedNum());
         System.out.println("Today is: " + today);
         ArrayList<Patient> allPatient = currentTrial.getPatientList();
