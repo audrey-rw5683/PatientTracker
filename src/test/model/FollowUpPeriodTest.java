@@ -62,10 +62,10 @@ public class FollowUpPeriodTest {
 
     @Test
     public void testPrintPeriod() {
-        String expectedFU7D = "From: 2023-02-02 to 2023-02-08. Is complete? false";
-        String expectedFU1M = "From: 2023-02-24 to 2023-03-10. Is complete? false";
-        String expectedFU6M = "From: 2023-07-01 to 2023-08-30. Is complete? false";
-        String expectedFU1Y = "From: 2023-12-28 to 2024-02-26. Is complete? false";
+        String expectedFU7D = "From: 2023-02-02 to 2023-02-08. Is followed? false";
+        String expectedFU1M = "From: 2023-02-24 to 2023-03-10. Is followed? false";
+        String expectedFU6M = "From: 2023-07-01 to 2023-08-30. Is followed? false";
+        String expectedFU1Y = "From: 2023-12-28 to 2024-02-26. Is followed? false";
 
         assertEquals(expectedFU7D, periodFU7D.printPeriod());
         assertEquals(expectedFU1M, periodFU1M.printPeriod());

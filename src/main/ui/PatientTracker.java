@@ -7,25 +7,48 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//Patient Tracker Application
 public class PatientTracker {
     Scanner scanner = new Scanner(System.in);
     ClinicalTrial currentTrial;
     LocalDate today;
 
+    // EFFECTS: runs the tracker application
     public PatientTracker() {
         init();
         runPatientTracker();
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the trial
     public void init() {
         today = LocalDate.now();
         this.currentTrial = new ClinicalTrial("currentTrial");
-        Patient p1 = new Patient("001", 'F', 28, LocalDate.of(2024, 2, 10));
-        currentTrial.addPatient(p1);
+        // p1 is after operation 3 days
+        Patient p1 = new Patient("001", 'F', 28, today.minusDays(3));
+        // p2 is after operation 33 days
+        Patient p2 = new Patient("002", 'F', 45, today.minusDays(33));
+        // p3 is after operation 180 days
+        Patient p3 = new Patient("003", 'M', 37, today.minusDays(180));
+        // p4 is after operation 500 days
+        Patient p4 = new Patient("004", 'M', 82, today.minusDays(500));
+
+        p2.getFollowUpPeriods().get(0).setFollowed();
+        p3.getFollowUpPeriods().get(0).setFollowed();
+        p3.getFollowUpPeriods().get(1).setFollowed();
+        p4.getFollowUpPeriods().get(0).setFollowed();
+        p4.getFollowUpPeriods().get(1).setFollowed();
+        p4.getFollowUpPeriods().get(2).setFollowed();
+
+        currentTrial.getPatientList().add(p1);
+        currentTrial.getPatientList().add(p2);
+        currentTrial.getPatientList().add(p3);
+        currentTrial.getPatientList().add(p4);
     }
 
+    // EFFECTS: displays the main menu
     public void displayMainMenu() {
-        System.out.println("Clinic Management System");
+        System.out.println("\nClinic Management System");
         System.out.println("1. Management");
         System.out.println("2. Reminder");
         System.out.println("3. Current Status");
@@ -33,22 +56,28 @@ public class PatientTracker {
         System.out.print("Enter your choice: ");
     }
 
+    // EFFECTS: displays the management menu
     public void displayManageSubMenu() {
-        System.out.println("Manage Menu:");
+        System.out.println("\nManage Menu:");
         System.out.println("1. Add Patient");
         System.out.println("2. Follow-up");
         System.out.println("3. Remove Patient");
         System.out.println("4. Back");
     }
 
+    // EFFECTS: displays the patient's all follow-up periods
     public void displayFollowUpPeriod(Patient patient) {
-        System.out.println("Choose one followup period as completed: ");
+        System.out.println("\nChoose one followup period as completed: ");
         System.out.println("1. Post-operation 1-7 days" + patient.getFollowUpPeriods().get(0).printPeriod());
         System.out.println("2. Post-operation 23-37 days" + patient.getFollowUpPeriods().get(1).printPeriod());
         System.out.println("3. Post-operation 150-210 days" + patient.getFollowUpPeriods().get(2).printPeriod());
         System.out.println("4. Post-operation 330-360 days" + patient.getFollowUpPeriods().get(3).printPeriod());
+        System.out.println("5. back to management");
+        System.out.println("Trial completed? " + patient.isTrialCompleted());
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user input
     public void runPatientTracker() {
         while (true) {
             displayMainMenu();
@@ -56,7 +85,7 @@ public class PatientTracker {
             scanner.nextLine();
             switch (choice) {
                 case 1:
-                    doManagement(scanner);
+                    doManagement();
                     break;
                 case 2:
                     doReminder();
@@ -65,18 +94,20 @@ public class PatientTracker {
                     doCurrentStatus();
                     break;
                 case 4:
-                    System.out.println("Exiting the program...");
+                    System.out.println("\nExiting the program...");
                     return;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("Invalid choice. Please try again.\n");
             }
         }
     }
 
-    private void doManagement(Scanner scanner) {
+    // MODIFIES: this
+    // EFFECTS: goes to management sub menu
+    private void doManagement() {
         while (true) {
             displayManageSubMenu();
-            System.out.print("Enter your choice: ");
+            System.out.print("\nEnter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
             switch (choice) {
@@ -97,36 +128,45 @@ public class PatientTracker {
         }
     }
 
+    // REQUIRES: valid inputs
+    // MODIFIES: this
+    // EFFECTS: processes adding patient
     public void doAddPatient() {
-        System.out.print("Enter patient ID: ");
+        System.out.print("\nEnter patient ID: ");
         String id = scanner.nextLine();
         System.out.print("Enter patient gender (M/F): ");
         char gender = scanner.nextLine().charAt(0);
-        System.out.print("Enter patient age: ");
+        System.out.print("Enter patient age (0-100): ");
         int age = scanner.nextInt();
         scanner.nextLine();
         System.out.print("Enter operation Date (yyyy-mm-dd): ");
-        System.out.print("Enter operation year: ");
+        System.out.print("Enter operation year (yyyy): ");
         int year = scanner.nextInt();
-        System.out.print("Enter operation month: ");
+        System.out.print("Enter operation month (mm): ");
         int month = scanner.nextInt();
-        System.out.print("Enter operation day: ");
+        System.out.print("Enter operation day (dd): ");
         int day = scanner.nextInt();
         LocalDate operationDate = LocalDate.of(year, month, day);
         Patient newPatient = new Patient(id, gender, age, operationDate);
         currentTrial.addPatient(newPatient);
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes following up
     public void doFollowUp() {
-        System.out.print("Enter patient ID: ");
+        System.out.print("\nEnter patient ID: ");
         String id = scanner.nextLine();
         Patient targetPatient = currentTrial.findPatient(id);
-        if (targetPatient != null && targetPatient.getCurrentPeriod() != null) {
+        if (targetPatient != null) {
             System.out.println("Patient History: ");
             displayFollowUpPeriod(targetPatient);
             int index = scanner.nextInt();
+            if (index > 4) {
+                doManagement();
+            }
             targetPatient.markFollowed(index);
-            System.out.println("Follow-up marked as completed for patient " + id);
+            targetPatient.checkTrialCompleted();
+            System.out.println("\nFollow-up marked as completed for patient " + id);
             System.out.println("Patient History: ");
             displayFollowUpPeriod(targetPatient);
         } else {
@@ -134,24 +174,30 @@ public class PatientTracker {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes moving patient
     public void doRemovePatient() {
-        System.out.print("Enter patient ID: ");
+        System.out.print("\nEnter patient ID: ");
         String id = scanner.nextLine();
         Patient targetPatient = currentTrial.findPatient(id);
         currentTrial.removePatient(targetPatient);
     }
 
+    // MODIFIES: this
+    // EFFECTS: displays a list of patients who needs follow-up today
     public void doReminder() {
         ArrayList<Patient> patientsToday = currentTrial.getFollowUpList();
+        System.out.println("\nFollow up list: ");
         for (Patient p : patientsToday) {
-            System.out.println("Follow up list: ");
             System.out.println(p.getPatientId());
             System.out.println(p.getCurrentPeriod().printPeriod());
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: summarize all patients
     public void doCurrentStatus() {
-        System.out.println("Clinical Trial Name: " + currentTrial.getTrialName());
+        System.out.println("\nClinical Trial Name: " + currentTrial.getTrialName());
         System.out.println("The Number of all patients: " + currentTrial.getPatientNum());
         System.out.println("The Number of patients who need follow-up: " + currentTrial.getFollowUpNum());
         System.out.println("The Number of patients who has completed this trial: " + currentTrial.getCompletedNum());

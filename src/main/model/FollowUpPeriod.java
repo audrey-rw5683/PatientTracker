@@ -41,7 +41,7 @@ public class FollowUpPeriod {
 
     //EFFECTS: produces a line containing follow-up start date, end date and completion status
     public String printPeriod() {
-        return "From: " + getStartDate() + " to " + getEndDate() + ". Is complete? " + checkIsFollowed();
+        return "From: " + getStartDate() + " to " + getEndDate() + ". Is followed? " + checkIsFollowed();
     }
 
     //EFFECTS: produces the follow-up start date
