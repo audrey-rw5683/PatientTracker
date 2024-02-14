@@ -11,7 +11,7 @@ public class Patient {
     private int age;
     private LocalDate operationDate;
     private ArrayList<FollowUpPeriod> followUpPeriods;
-//    private ArrayList<Boolean> isFollowedList;
+    private ArrayList<Boolean> isFollowedList;
     private ArrayList<String> followUpMarks = new ArrayList<>(Arrays.asList("FU7D", "FU1M", "FU6M", "FU1Y"));
     private boolean needFollowUpToday;
     private boolean trialCompleted;
@@ -23,10 +23,10 @@ public class Patient {
         this.age = age;
         this.operationDate = operationDate;
 
-//        isFollowedList = new ArrayList<>(4);
-//        for (int i = 0; i < 4; i++) {
-//            this.isFollowedList.add(false);
-//        }
+        isFollowedList = new ArrayList<>(4);
+        for (int i = 0; i < 4; i++) {
+            this.isFollowedList.add(false);
+        }
 
         followUpPeriods = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
@@ -111,9 +111,9 @@ public class Patient {
         return followUpMarks;
     }
 
-//    public ArrayList<Boolean> getIsFollowedList() {
-//        return isFollowedList;
-//    }
+    public ArrayList<Boolean> getIsFollowedList() {
+        return isFollowedList;
+    }
 
     public LocalDate getOperationDate() {
         return operationDate;

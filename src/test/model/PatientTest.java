@@ -33,8 +33,8 @@ public class PatientTest {
         assertEquals('F', patient1.getGender());
         assertEquals(28, patient1.getAge());
         assertEquals(today.minusDays(3), patient1.getOperationDate());
-//        assertEquals(4, patient1.getIsFollowedList().size());
-//        assertFalse(patient1.getIsFollowedList().contains(true));
+        assertEquals(4, patient1.getIsFollowedList().size());
+        assertFalse(patient1.getIsFollowedList().contains(true));
         assertEquals("FU7D", patient1.getFollowUpMarks().get(0));
         assertEquals("FU1M", patient1.getFollowUpMarks().get(1));
         assertEquals("FU6M", patient1.getFollowUpMarks().get(2));
@@ -46,10 +46,10 @@ public class PatientTest {
         assertEquals(fup2.printPeriod(),patient1.getFollowUpPeriods().get(1).printPeriod());
         assertEquals(fup3.printPeriod(),patient1.getFollowUpPeriods().get(2).printPeriod());
         assertEquals(fup4.printPeriod(),patient1.getFollowUpPeriods().get(3).printPeriod());
-//        assertFalse(patient1.getIsFollowedList().get(0));
-//        assertFalse(patient1.getIsFollowedList().get(1));
-//        assertFalse(patient1.getIsFollowedList().get(2));
-//        assertFalse(patient1.getIsFollowedList().get(3));
+        assertFalse(patient1.getIsFollowedList().get(0));
+        assertFalse(patient1.getIsFollowedList().get(1));
+        assertFalse(patient1.getIsFollowedList().get(2));
+        assertFalse(patient1.getIsFollowedList().get(3));
     }
 
     @Test
