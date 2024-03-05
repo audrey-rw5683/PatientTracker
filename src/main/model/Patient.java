@@ -1,13 +1,16 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class Patient {
+public class Patient implements Writable {
     private final String patientId;
-    private final char gender;
+    private final String gender;
     private final int age;
     private final LocalDate operationDate;
     private final ArrayList<FollowUpPeriod> followUpPeriods;
@@ -19,7 +22,7 @@ public class Patient {
     //EFFECTS: constructs a patient with id, gender, age and operation date
     //generates a list of follow-up periods according to the operation date
     //The patient has not completed the trial by default
-    public Patient(String patientId, char gender, int age, LocalDate operationDate) {
+    public Patient(String patientId, String gender, int age, LocalDate operationDate) {
         this.patientId = patientId;
         this.gender = gender;
         this.age = age;
@@ -134,9 +137,23 @@ public class Patient {
         return operationDate;
     }
 
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
 
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("id", patientId);
+        json.put("gender", gender);
+        json.put("age", age);
+        json.put("operation date", operationDate);
+        json.put("follow up period", followUpPeriods);
+        json.put("isFollowedList", isFollowedList);
+        json.put("followUpMarks", followUpMarks);
+        json.put("needFollowUpToday", needFollowUpToday);
+        json.put("trialCompleted", trialCompleted);
+        return json;
+    }
 }

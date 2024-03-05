@@ -20,9 +20,9 @@ public class PatientTest {
     @BeforeEach
     void setup () {
         today = LocalDate.now();
-        patient1 = new Patient("001", 'F', 28, today.minusDays(3));
-        patient2 = new Patient("002", 'M', 65, today.minusDays(500));
-        patient3 = new Patient("003", 'F', 57, today.plusDays(1000));
+        patient1 = new Patient("001", "F", 28, today.minusDays(3));
+        patient2 = new Patient("002", "M", 65, today.minusDays(500));
+        patient3 = new Patient("003", "F", 57, today.plusDays(1000));
         fup1 = new FollowUpPeriod("FU7D", today.minusDays(3));
         fup2 = new FollowUpPeriod("FU1M", today.minusDays(3));
         fup3 = new FollowUpPeriod("FU6M", today.minusDays(3));

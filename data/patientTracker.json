@@ -1,0 +1,119 @@
+{
+    "Clinical Trial": "currentTrial",
+    "Patients": [
+        {
+            "operation date": "2024-03-01",
+            "gender": "F",
+            "needFollowUpToday": true,
+            "follow up period": [
+                {
+                    "endDate": "2024-03-08",
+                    "startDate": "2024-03-02"
+                },
+                {
+                    "endDate": "2024-04-07",
+                    "startDate": "2024-03-24"
+                },
+                {
+                    "endDate": "2024-09-27",
+                    "startDate": "2024-07-29"
+                },
+                {
+                    "endDate": "2025-03-26",
+                    "startDate": "2025-01-25"
+                }
+            ],
+            "isFollowedList": [
+                false,
+                false,
+                false,
+                false
+            ],
+            "id": "001",
+            "age": 28,
+            "trialCompleted": false,
+            "followUpMarks": [
+                "FU7D",
+                "FU1M",
+                "FU6M",
+                "FU1Y"
+            ]
+        },
+        {
+            "operation date": "2023-09-06",
+            "gender": "M",
+            "needFollowUpToday": true,
+            "follow up period": [
+                {
+                    "endDate": "2023-09-13",
+                    "startDate": "2023-09-07"
+                },
+                {
+                    "endDate": "2023-10-13",
+                    "startDate": "2023-09-29"
+                },
+                {
+                    "endDate": "2024-04-03",
+                    "startDate": "2024-02-03"
+                },
+                {
+                    "endDate": "2024-09-30",
+                    "startDate": "2024-08-01"
+                }
+            ],
+            "isFollowedList": [
+                false,
+                false,
+                false,
+                false
+            ],
+            "id": "003",
+            "age": 37,
+            "trialCompleted": false,
+            "followUpMarks": [
+                "FU7D",
+                "FU1M",
+                "FU6M",
+                "FU1Y"
+            ]
+        },
+        {
+            "operation date": "2022-10-21",
+            "gender": "M",
+            "needFollowUpToday": false,
+            "follow up period": [
+                {
+                    "endDate": "2022-10-28",
+                    "startDate": "2022-10-22"
+                },
+                {
+                    "endDate": "2022-11-27",
+                    "startDate": "2022-11-13"
+                },
+                {
+                    "endDate": "2023-05-19",
+                    "startDate": "2023-03-20"
+                },
+                {
+                    "endDate": "2023-11-15",
+                    "startDate": "2023-09-16"
+                }
+            ],
+            "isFollowedList": [
+                false,
+                false,
+                false,
+                false
+            ],
+            "id": "004",
+            "age": 82,
+            "trialCompleted": false,
+            "followUpMarks": [
+                "FU7D",
+                "FU1M",
+                "FU6M",
+                "FU1Y"
+            ]
+        }
+    ]
+}

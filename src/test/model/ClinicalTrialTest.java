@@ -17,9 +17,9 @@ public class ClinicalTrialTest {
     @BeforeEach
     void setup() {
         today = LocalDate.now();
-        patient1 = new Patient("001", 'F', 28, today.minusDays(3));
-        patient2 = new Patient("002", 'M', 65, today.minusDays(500));
-        patient3 = new Patient("003", 'F', 57, today.minusDays(180));
+        patient1 = new Patient("001", "F", 28, today.minusDays(3));
+        patient2 = new Patient("002", "M", 65, today.minusDays(500));
+        patient3 = new Patient("003", "F", 57, today.minusDays(180));
         testTrial = new ClinicalTrial("Trial-1");
     }
 

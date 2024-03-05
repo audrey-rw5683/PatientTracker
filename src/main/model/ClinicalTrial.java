@@ -1,8 +1,12 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
-public class ClinicalTrial {
+public class ClinicalTrial implements Writable {
     private final String trialName;
     private final ArrayList<Patient> patientList;
 
@@ -85,5 +89,24 @@ public class ClinicalTrial {
 
     public String getTrialName() {
         return trialName;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Clinical Trial", trialName);
+        json.put("Patients", patientsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray patientsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Patient p : patientList) {
+            jsonArray.put(p.toJson());
+        }
+
+        return jsonArray;
     }
 }

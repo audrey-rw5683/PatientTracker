@@ -2,20 +2,29 @@ package ui;
 
 import model.ClinicalTrial;
 import model.Patient;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 //Patient Tracker Application
 public class PatientTracker {
+    private static final String JSON_STORE = "./data/patientTracker.json";
     Scanner scanner = new Scanner(System.in);
     ClinicalTrial currentTrial;
     LocalDate today;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the tracker application
-    public PatientTracker() {
+    public PatientTracker() throws FileNotFoundException {
         init();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runPatientTracker();
     }
 
@@ -25,13 +34,13 @@ public class PatientTracker {
         today = LocalDate.now();
         this.currentTrial = new ClinicalTrial("currentTrial");
         // p1 is after operation 3 days
-        Patient p1 = new Patient("001", 'F', 28, today.minusDays(3));
+        Patient p1 = new Patient("001", "F", 28, today.minusDays(3));
         // p2 is after operation 33 days
-        Patient p2 = new Patient("002", 'F', 45, today.minusDays(33));
+        Patient p2 = new Patient("002", "F", 45, today.minusDays(33));
         // p3 is after operation 180 days
-        Patient p3 = new Patient("003", 'M', 37, today.minusDays(180));
+        Patient p3 = new Patient("003", "M", 37, today.minusDays(180));
         // p4 is after operation 500 days
-        Patient p4 = new Patient("004", 'M', 82, today.minusDays(500));
+        Patient p4 = new Patient("004", "M", 82, today.minusDays(500));
 
         p2.getFollowUpPeriods().get(0).setFollowed();
         p3.getFollowUpPeriods().get(0).setFollowed();
@@ -46,13 +55,47 @@ public class PatientTracker {
         currentTrial.getPatientList().add(p4);
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user input
+    public void runPatientTracker() {
+        while (true) {
+            displayMainMenu();
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            switch (choice) {
+                case 1:
+                    doManagement();
+                    break;
+                case 2:
+                    doReminder();
+                    break;
+                case 3:
+                    doCurrentStatus();
+                    break;
+                case 4:
+                    saveClinicalTrial();
+                    break;
+                case 5:
+                    loadClinicalTrial();
+                    break;
+                case 6:
+                    System.out.println("\nExiting the program...");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.\n");
+            }
+        }
+    }
+
     // EFFECTS: displays the main menu
     public void displayMainMenu() {
         System.out.println("\nClinic Management System");
         System.out.println("1. Management");
         System.out.println("2. Reminder");
         System.out.println("3. Current Status");
-        System.out.println("4. Quit");
+        System.out.println("4. Save today's follow-up progress");
+        System.out.println("5. Load previous follow-up progress");
+        System.out.println("6. Quit");
         System.out.print("Enter your choice: ");
     }
 
@@ -76,31 +119,7 @@ public class PatientTracker {
         System.out.println("Trial completed? " + patient.isTrialCompleted());
     }
 
-    // MODIFIES: this
-    // EFFECTS: processes user input
-    public void runPatientTracker() {
-        while (true) {
-            displayMainMenu();
-            int choice = scanner.nextInt();
-            scanner.nextLine();
-            switch (choice) {
-                case 1:
-                    doManagement();
-                    break;
-                case 2:
-                    doReminder();
-                    break;
-                case 3:
-                    doCurrentStatus();
-                    break;
-                case 4:
-                    System.out.println("\nExiting the program...");
-                    return;
-                default:
-                    System.out.println("Invalid choice. Please try again.\n");
-            }
-        }
-    }
+
 
     // MODIFIES: this
     // EFFECTS: goes to management sub menu
@@ -139,7 +158,7 @@ public class PatientTracker {
             doManagement();
         }
         System.out.print("Enter patient gender (M/F): ");
-        char gender = scanner.nextLine().charAt(0);
+        String gender = scanner.nextLine();
         System.out.print("Enter patient age (0-100): ");
         int age = scanner.nextInt();
         scanner.nextLine();
@@ -221,6 +240,29 @@ public class PatientTracker {
         for (Patient p : allPatient) {
             System.out.println(p.getPatientId());
             System.out.println(p.printFollowUpPeriods());
+        }
+    }
+
+    // EFFECTS: saves the workroom to file
+    private void saveClinicalTrial() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(currentTrial);
+            jsonWriter.close();
+            System.out.println("Saved " + currentTrial.getTrialName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadClinicalTrial() {
+        try {
+            currentTrial = jsonReader.read();
+            System.out.println("Loaded " + currentTrial.getTrialName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 }
