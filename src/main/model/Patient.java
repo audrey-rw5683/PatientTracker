@@ -7,7 +7,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
+// Represents a patient with id, gender, age, operation date
+// along with their corresponding follow-up times,
+// whether each follow-up is completed, and the overall trial completion status of each patient.
 public class Patient implements Writable {
     private final String patientId;
     private final String gender;
@@ -141,7 +143,7 @@ public class Patient implements Writable {
         return gender;
     }
 
-
+    // EFFECTS: returns patient as JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

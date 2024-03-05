@@ -17,7 +17,7 @@ class JsonReaderTest extends JsonTest {
     void testReaderNonExistentFile() {
         JsonReader reader = new JsonReader("./data/noSuchFile.json");
         try {
-            ClinicalTrial wr = reader.read();
+            ClinicalTrial trial = reader.read();
             fail("IOException expected");
         } catch (IOException e) {
             // pass
@@ -26,11 +26,11 @@ class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderEmptyClinicalTrial() {
-        JsonReader reader = new JsonReader("./data/testReaderEmptyWorkRoom.json");
+        JsonReader reader = new JsonReader("./data/testReaderEmptyClinicalTrial.json");
         try {
-            ClinicalTrial wr = reader.read();
-            assertEquals("currentTrial", wr.getTrialName());
-            assertEquals(0, wr.getPatientNum());
+            ClinicalTrial trial = reader.read();
+            assertEquals("currentTrial", trial.getTrialName());
+            assertEquals(0, trial.getPatientNum());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
@@ -38,11 +38,11 @@ class JsonReaderTest extends JsonTest {
 
     @Test
     void testReaderGeneralClinicalTrial() {
-        JsonReader reader = new JsonReader("./data/testReaderGeneralWorkRoom.json");
+        JsonReader reader = new JsonReader("./data/testReaderGeneralClinicalTrial.json");
         try {
-            ClinicalTrial wr = reader.read();
-            assertEquals("currentTrial", wr.getTrialName());
-            List<Patient> patients = wr.getPatientList();
+            ClinicalTrial trial = reader.read();
+            assertEquals("currentTrial", trial.getTrialName());
+            List<Patient> patients = trial.getPatientList();
             assertEquals(3, patients.size());
             checkPatient("001", patients.get(0));
             checkPatient("003", patients.get(1));

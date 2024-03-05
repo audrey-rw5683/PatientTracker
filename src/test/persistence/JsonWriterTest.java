@@ -20,7 +20,7 @@ class JsonWriterTest extends JsonTest {
     @Test
     void testWriterInvalidFile() {
         try {
-            ClinicalTrial wr = new ClinicalTrial("currentTrial");
+            ClinicalTrial trial = new ClinicalTrial("currentTrial");
             JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             writer.open();
             fail("IOException was expected");
@@ -30,39 +30,39 @@ class JsonWriterTest extends JsonTest {
     }
 
     @Test
-    void testWriterEmptyWorkroom() {
+    void testWriterEmptyClinicalTrial() {
         try {
-            ClinicalTrial wr = new ClinicalTrial("currentTrial");
-            JsonWriter writer = new JsonWriter("./data/testWriterEmptyWorkroom.json");
+            ClinicalTrial trial = new ClinicalTrial("currentTrial");
+            JsonWriter writer = new JsonWriter("./data/testWriterEmptyClinicalTrial.json");
             writer.open();
-            writer.write(wr);
+            writer.write(trial);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterEmptyWorkroom.json");
-            wr = reader.read();
-            assertEquals("currentTrial", wr.getTrialName());
-            assertEquals(0, wr.getPatientNum());
+            JsonReader reader = new JsonReader("./data/testWriterEmptyClinicalTrial.json");
+            trial = reader.read();
+            assertEquals("currentTrial", trial.getTrialName());
+            assertEquals(0, trial.getPatientNum());
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
     }
 
     @Test
-    void testWriterGeneralWorkroom() {
+    void testWriterGeneralClinicalTrial() {
         try {
-            ClinicalTrial wr = new ClinicalTrial("currentTrial");
+            ClinicalTrial trial = new ClinicalTrial("currentTrial");
             LocalDate today = LocalDate.now();
-            wr.addPatient(new Patient("001", "F", 28, today.minusDays(3)));
-            wr.addPatient(new Patient("003", "M", 37, today.minusDays(180)));
-            JsonWriter writer = new JsonWriter("./data/testWriterGeneralWorkroom.json");
+            trial.addPatient(new Patient("001", "F", 28, today.minusDays(3)));
+            trial.addPatient(new Patient("003", "M", 37, today.minusDays(180)));
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralClinicalTrial.json");
             writer.open();
-            writer.write(wr);
+            writer.write(trial);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterGeneralWorkroom.json");
-            wr = reader.read();
-            assertEquals("currentTrial", wr.getTrialName());
-            List<Patient> patients = wr.getPatientList();
+            JsonReader reader = new JsonReader("./data/testWriterGeneralClinicalTrial.json");
+            trial = reader.read();
+            assertEquals("currentTrial", trial.getTrialName());
+            List<Patient> patients = trial.getPatientList();
             assertEquals(2, patients.size());
             checkPatient("001", patients.get(0));
             checkPatient("003", patients.get(1));

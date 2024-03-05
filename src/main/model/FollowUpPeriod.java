@@ -2,6 +2,8 @@ package model;
 
 import java.time.LocalDate;
 
+// Represents a followup period calculated from a patient's operation date
+// along with a start date, end date and the completion status of the current follow-up
 public class FollowUpPeriod {
     //private String followUpMark;
     private LocalDate startDate;

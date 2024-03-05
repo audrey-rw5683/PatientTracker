@@ -6,6 +6,7 @@ import persistence.Writable;
 
 import java.util.ArrayList;
 
+// Represents a clinical trial with a list of enrolled patients
 public class ClinicalTrial implements Writable {
     private final String trialName;
     private final ArrayList<Patient> patientList;
@@ -91,6 +92,7 @@ public class ClinicalTrial implements Writable {
         return trialName;
     }
 
+    // EFFECTS: returns this trial as JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -99,7 +101,7 @@ public class ClinicalTrial implements Writable {
         return json;
     }
 
-    // EFFECTS: returns things in this workroom as a JSON array
+    // EFFECTS: returns patients in this trial as a JSON array
     private JSONArray patientsToJson() {
         JSONArray jsonArray = new JSONArray();
 

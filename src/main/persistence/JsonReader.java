@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.stream.Stream;
 
-// Represents a reader that reads workroom from JSON data stored in file
+// Represents a reader that reads trial from JSON data stored in file
 public class JsonReader {
     private String source;
 
@@ -21,7 +21,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads trial from file and returns it;
     // throws IOException if an error occurs reading data from file
     public ClinicalTrial read() throws IOException {
         String jsonData = readFile(source);
@@ -43,38 +43,29 @@ public class JsonReader {
     // EFFECTS: parses a trial from JSON object and returns it
     private ClinicalTrial parseClinicalTrial(JSONObject jsonObject) {
         String name = jsonObject.getString("Clinical Trial");
-        ClinicalTrial wr = new ClinicalTrial(name);
-        addPatients(wr, jsonObject);
-        return wr;
+        ClinicalTrial trial = new ClinicalTrial(name);
+        addPatients(trial, jsonObject);
+        return trial;
     }
 
-    // MODIFIES: wr
+    // MODIFIES: trial
     // EFFECTS: parses patients from JSON object and adds them to trial
-    private void addPatients(ClinicalTrial wr, JSONObject jsonObject) {
+    private void addPatients(ClinicalTrial trial, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("Patients");
         for (Object json : jsonArray) {
             JSONObject nextPatient = (JSONObject) json;
-            addPatient(wr, nextPatient);
+            addPatient(trial, nextPatient);
         }
     }
 
-    // MODIFIES: wr
+    // MODIFIES: trial
     // EFFECTS: parses patient from JSON object and adds it to trial
-    private void addPatient(ClinicalTrial wr, JSONObject jsonObject) {
+    private void addPatient(ClinicalTrial trial, JSONObject jsonObject) {
         String patientId = jsonObject.getString("id");
         String gender = jsonObject.getString("gender");
         int age = jsonObject.getInt("age");
         LocalDate operationDate = LocalDate.parse(jsonObject.getString("operation date"));
         Patient patient = new Patient(patientId, gender, age, operationDate);
-        wr.addPatient(patient);
+        trial.addPatient(patient);
     }
-    //    private final String patientId;
-//    private final char gender;
-//    private final int age;
-//    private final LocalDate operationDate;
-//    private final ArrayList<FollowUpPeriod> followUpPeriods;
-//    private final ArrayList<Boolean> isFollowedList;
-//    private final ArrayList<String> followUpMarks = new ArrayList<>(Arrays.asList("FU7D", "FU1M", "FU6M", "FU1Y"));
-//    private final boolean needFollowUpToday;
-//    private boolean trialCompleted;
 }

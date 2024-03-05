@@ -17,8 +17,8 @@ public class PatientTracker {
     Scanner scanner = new Scanner(System.in);
     ClinicalTrial currentTrial;
     LocalDate today;
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
+    private final JsonWriter jsonWriter;
+    private final JsonReader jsonReader;
 
     // EFFECTS: runs the tracker application
     public PatientTracker() throws FileNotFoundException {
@@ -62,30 +62,39 @@ public class PatientTracker {
             displayMainMenu();
             int choice = scanner.nextInt();
             scanner.nextLine();
-            switch (choice) {
-                case 1:
-                    doManagement();
-                    break;
-                case 2:
-                    doReminder();
-                    break;
-                case 3:
-                    doCurrentStatus();
-                    break;
-                case 4:
-                    saveClinicalTrial();
-                    break;
-                case 5:
-                    loadClinicalTrial();
-                    break;
-                case 6:
-                    System.out.println("\nExiting the program...");
-                    return;
-                default:
-                    System.out.println("Invalid choice. Please try again.\n");
+            chooseMainMenu(choice);
+            if (choice == 6) {
+                return;
             }
         }
     }
+
+    // EFFECTS: directs user to next menu
+    public void chooseMainMenu(int choice) {
+        switch (choice) {
+            case 1:
+                doManagement();
+                break;
+            case 2:
+                doReminder();
+                break;
+            case 3:
+                doCurrentStatus();
+                break;
+            case 4:
+                saveClinicalTrial();
+                break;
+            case 5:
+                loadClinicalTrial();
+                break;
+            case 6:
+                System.out.println("\nExiting the program...");
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.\n");
+        }
+    }
+
 
     // EFFECTS: displays the main menu
     public void displayMainMenu() {
@@ -243,7 +252,7 @@ public class PatientTracker {
         }
     }
 
-    // EFFECTS: saves the workroom to file
+    // EFFECTS: saves the trial to file
     private void saveClinicalTrial() {
         try {
             jsonWriter.open();
@@ -256,7 +265,7 @@ public class PatientTracker {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads workroom from file
+    // EFFECTS: loads trial from file
     private void loadClinicalTrial() {
         try {
             currentTrial = jsonReader.read();

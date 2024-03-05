@@ -32,7 +32,7 @@ public class PatientTest {
     @Test
     void testConstructor() {
         assertEquals("001", patient1.getPatientId());
-        assertEquals('F', patient1.getGender());
+        assertEquals("F", patient1.getGender());
         assertEquals(28, patient1.getAge());
         assertEquals(today.minusDays(3), patient1.getOperationDate());
         assertEquals(4, patient1.getIsFollowedList().size());
