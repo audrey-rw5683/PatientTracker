@@ -13,6 +13,11 @@ import java.time.LocalDate;
 import java.util.stream.Stream;
 
 // Represents a reader that reads trial from JSON data stored in file
+//-/***************************************************************************************
+// *    Title: <JSON serialization demo>
+// *    Code version: <20210307>
+// *    Availability: <https://github.com/stleary/JSON-java>
+// ***************************************************************************************/
 public class JsonReader {
     private String source;
 

@@ -36,7 +36,6 @@ public class ClinicalTrial implements Writable {
         }
     }
 
-
     //EFFECTS: find the patient with the given id
     // if there is no such patient, return null
     public Patient findPatient(String id) {
@@ -92,6 +91,11 @@ public class ClinicalTrial implements Writable {
         return trialName;
     }
 
+//-/***************************************************************************************
+// *    Title: <JSON serialization demo>
+// *    Code version: <20210307>
+// *    Availability: <https://github.com/stleary/JSON-java>
+// ***************************************************************************************/
     // EFFECTS: returns this trial as JSON object
     @Override
     public JSONObject toJson() {
@@ -101,6 +105,11 @@ public class ClinicalTrial implements Writable {
         return json;
     }
 
+//-/***************************************************************************************
+// *    Title: <JSON serialization demo>
+// *    Code version: <20210307>
+// *    Availability: <https://github.com/stleary/JSON-java>
+// ***************************************************************************************/
     // EFFECTS: returns patients in this trial as a JSON array
     private JSONArray patientsToJson() {
         JSONArray jsonArray = new JSONArray();

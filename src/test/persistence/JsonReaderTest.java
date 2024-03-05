@@ -11,6 +11,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+// Represents a test suite for JsonReader
+//-/***************************************************************************************
+// *    Title: <JSON serialization demo>
+// *    Code version: <20210307>
+// *    Availability: <https://github.com/stleary/JSON-java>
+// ***************************************************************************************/
 class JsonReaderTest extends JsonTest {
 
     @Test

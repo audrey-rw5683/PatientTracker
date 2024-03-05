@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Represents a test suite for FollowUpPeriod
 public class FollowUpPeriodTest {
     private FollowUpPeriod periodFU7D;
     private FollowUpPeriod periodFU1M;

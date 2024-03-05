@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Represents a test suite for Patient
 public class PatientTest {
     private Patient patient1;
     private Patient patient2;

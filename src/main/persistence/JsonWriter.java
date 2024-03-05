@@ -8,7 +8,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-// Represents a writer that writes JSON representation of workroom to file
+// Represents a writer that writes JSON representation of trail to file
+//-/***************************************************************************************
+// *    Title: <JSON serialization demo>
+// *    Code version: <20210307>
+// *    Availability: <https://github.com/stleary/JSON-java>
+// ***************************************************************************************/
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
@@ -27,7 +32,7 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
+    // EFFECTS: writes JSON representation of trial to file
     public void write(ClinicalTrial trial) {
         JSONObject json = trial.toJson();
         saveToFile(json.toString(TAB));

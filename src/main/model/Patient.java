@@ -143,6 +143,11 @@ public class Patient implements Writable {
         return gender;
     }
 
+//-/***************************************************************************************
+// *    Title: <JSON serialization demo>
+// *    Code version: <20210307>
+// *    Availability: <https://github.com/stleary/JSON-java>
+// ***************************************************************************************/
     // EFFECTS: returns patient as JSON object
     @Override
     public JSONObject toJson() {

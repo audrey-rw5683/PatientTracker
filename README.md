@@ -27,3 +27,6 @@ the data obtained is of higher quality, and the results of clinical trials are m
 - As a user, I want to be able to see the number of all patients in my clinical trial, the number of patients that have been followed up and the number of patients that have completed this trial (complete)
 - As a user, I want to be able to save my clinical trial progress  (complete)
 - As a user, I want to be able to be able to load my clinical trial progress (complete)
+
+## Citations
+- JSON serialization demo, Code version: <20210307>, Availability: <https://github.com/stleary/JSON-java>

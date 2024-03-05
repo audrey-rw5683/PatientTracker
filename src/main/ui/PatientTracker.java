@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//Patient Tracker Application
+//Represents a Patient Tracker Application
 public class PatientTracker {
     private static final String JSON_STORE = "./data/patientTracker.json";
     Scanner scanner = new Scanner(System.in);
@@ -162,67 +162,65 @@ public class PatientTracker {
     public void doAddPatient() {
         System.out.print("\nEnter patient ID: ");
         String id = scanner.nextLine();
-        if (currentTrial.findPatient(id) != null) {
+        if (null != currentTrial.findPatient(id)) {
             System.out.println("Patient with ID " + id + " already exists.");
-            doManagement();
+        } else {
+            System.out.print("Enter patient gender (M/F): ");
+            String gender = scanner.nextLine();
+            System.out.print("Enter patient age (0-100): ");
+            int age = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("Enter operation Date (yyyy-mm-dd): ");
+            System.out.print("Enter operation year (yyyy): ");
+            int year = scanner.nextInt();
+            System.out.print("Enter operation month (mm): ");
+            int month = scanner.nextInt();
+            System.out.print("Enter operation day (dd): ");
+            int day = scanner.nextInt();
+            LocalDate operationDate = LocalDate.of(year, month, day);
+            Patient newPatient = new Patient(id, gender, age, operationDate);
+            currentTrial.addPatient(newPatient);
+            System.out.println("The patient is added successfully!");
         }
-        System.out.print("Enter patient gender (M/F): ");
-        String gender = scanner.nextLine();
-        System.out.print("Enter patient age (0-100): ");
-        int age = scanner.nextInt();
-        scanner.nextLine();
-        System.out.print("Enter operation Date (yyyy-mm-dd): ");
-        System.out.print("Enter operation year (yyyy): ");
-        int year = scanner.nextInt();
-        System.out.print("Enter operation month (mm): ");
-        int month = scanner.nextInt();
-        System.out.print("Enter operation day (dd): ");
-        int day = scanner.nextInt();
-        LocalDate operationDate = LocalDate.of(year, month, day);
-        Patient newPatient = new Patient(id, gender, age, operationDate);
-        currentTrial.addPatient(newPatient);
-        System.out.println("The patient is added successfully!");
     }
+
 
     // MODIFIES: this
     // EFFECTS: processes following up
     public void doFollowUp() {
         System.out.print("\nEnter patient ID: ");
         String id = scanner.nextLine();
-        if (currentTrial.findPatient(id) == null) {
-            System.out.println("Cannot find this patient");
-            doManagement();
-        }
         Patient targetPatient = currentTrial.findPatient(id);
-        if (targetPatient != null) {
+        if (targetPatient == null) {
+            System.out.println("Cannot find this patient!");
+        } else {
             System.out.println("Patient History: ");
             displayFollowUpPeriod(targetPatient);
             int index = scanner.nextInt();
-            if (index > 4) {
-                doManagement();
+            if (index == 5) {
+                return;
             }
             targetPatient.markFollowed(index);
             targetPatient.checkTrialCompleted();
-            System.out.println("\nFollow-up marked as completed for patient " + id);
-            System.out.println("Patient History: ");
+            System.out.println("Follow-up marked as completed for patient " + id);
+            System.out.println("\nPatient History: ");
             displayFollowUpPeriod(targetPatient);
-        } else {
-            System.out.println("Patient not found or no current follow-up period available.");
         }
     }
+
 
     // MODIFIES: this
     // EFFECTS: processes moving patient
     public void doRemovePatient() {
         System.out.print("\nEnter patient ID: ");
         String id = scanner.nextLine();
-        if (currentTrial.findPatient(id) == null) {
-            System.out.println("Cannot find this patient");
-            doManagement();
-        }
         Patient targetPatient = currentTrial.findPatient(id);
-        currentTrial.removePatient(targetPatient);
-        System.out.println("This patient is removed successfully!");
+        if (targetPatient == null) {
+            System.out.println("Cannot find this patient");
+        } else {
+            currentTrial.removePatient(targetPatient);
+            System.out.println("This patient is removed successfully!");
+        }
     }
 
     // MODIFIES: this
@@ -252,6 +250,11 @@ public class PatientTracker {
         }
     }
 
+//-/***************************************************************************************
+// *    Title: <JSON serialization demo>
+// *    Code version: <20210307>
+// *    Availability: <https://github.com/stleary/JSON-java>
+// ***************************************************************************************/
     // EFFECTS: saves the trial to file
     private void saveClinicalTrial() {
         try {
@@ -264,6 +267,11 @@ public class PatientTracker {
         }
     }
 
+//-/***************************************************************************************
+// *    Title: <JSON serialization demo>
+// *    Code version: <20210307>
+// *    Availability: <https://github.com/stleary/JSON-java>
+// ***************************************************************************************/
     // MODIFIES: this
     // EFFECTS: loads trial from file
     private void loadClinicalTrial() {

@@ -1,1 +1,8 @@
-**NOTE:** any data files used by your project, including those used by test classes, must be added to this directory.
+## Data files
+- patientTracker.json - stores PatientTracker data
+- testReaderEmptyClinicalTrial
+- testReaderGeneralClinicalTrial
+- testWriterEmptyClinicalTrial
+- testWriterGeneralTrial
+## Citations
+- JSON serialization demo, Code version: <20210307>, Availability: <https://github.com/stleary/JSON-java>
