@@ -1,10 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.time.LocalDate;
 
 // Represents a followup period calculated from a patient's operation date
 // along with a start date, end date and the completion status of the current follow-up
-public class FollowUpPeriod {
+public class FollowUpPeriod implements Writable {
     //private String followUpMark;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -41,6 +44,10 @@ public class FollowUpPeriod {
         }
     }
 
+    public FollowUpPeriod(LocalDate startDate, LocalDate endDate, boolean isFollowed) {
+        this.isFollowed = isFollowed;
+    }
+
     //EFFECTS: produces a line containing follow-up start date, end date and completion status
     public String printPeriod() {
         return "From: " + getStartDate() + " to " + getEndDate() + ". Is followed? " + checkIsFollowed();
@@ -65,5 +72,15 @@ public class FollowUpPeriod {
     //EFFECTS: mark the period as followed
     public void setFollowed() {
         isFollowed = true;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("startDate", startDate.toString());
+        json.put("endDate", endDate.toString());
+        json.put("isFollowed", isFollowed);
+        // Include any other relevant information about the follow-up period
+        return json;
     }
 }

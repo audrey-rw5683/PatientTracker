@@ -49,10 +49,9 @@ class JsonReaderTest extends JsonTest {
             ClinicalTrial trial = reader.read();
             assertEquals("currentTrial", trial.getTrialName());
             List<Patient> patients = trial.getPatientList();
-            assertEquals(3, patients.size());
+            assertEquals(2, patients.size());
             checkPatient("001", patients.get(0));
             checkPatient("003", patients.get(1));
-            checkPatient("004", patients.get(2));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

@@ -2,6 +2,7 @@ package persistence;
 
 
 import model.ClinicalTrial;
+import model.FollowUpPeriod;
 import model.Patient;
 import org.junit.jupiter.api.Test;
 
@@ -9,8 +10,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 // Represents a test suite for JsonWriter
 //-/***************************************************************************************

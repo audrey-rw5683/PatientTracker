@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
@@ -15,8 +16,8 @@ public class Patient implements Writable {
     private final String gender;
     private final int age;
     private final LocalDate operationDate;
-    private final ArrayList<FollowUpPeriod> followUpPeriods;
-    private final ArrayList<Boolean> isFollowedList;
+    private ArrayList<FollowUpPeriod> followUpPeriods;
+    private ArrayList<Boolean> isFollowedList;
     private final ArrayList<String> followUpMarks = new ArrayList<>(Arrays.asList("FU7D", "FU1M", "FU6M", "FU1Y"));
     private final boolean needFollowUpToday;
     private boolean trialCompleted;
@@ -30,20 +31,24 @@ public class Patient implements Writable {
         this.age = age;
         this.operationDate = operationDate;
 
-        isFollowedList = new ArrayList<>(4);
-        for (int i = 0; i < 4; i++) {
-            this.isFollowedList.add(false);
-        }
+
 
         followUpPeriods = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             this.followUpPeriods.add(new FollowUpPeriod(followUpMarks.get(i), operationDate));
         }
 
+        isFollowedList = new ArrayList<>(4);
+        for (int i = 0; i < 4; i++) {
+            Boolean value = followUpPeriods.get(i).checkIsFollowed();
+            this.isFollowedList.add(value);
+        }
+
         trialCompleted = false;
 
         needFollowUpToday = checkNeedFollowUpToday();
     }
+
 
 
     //MODIFIES: this
@@ -143,12 +148,15 @@ public class Patient implements Writable {
         return gender;
     }
 
-//-/***************************************************************************************
+    public void updateFollowUpPeriods(ArrayList<FollowUpPeriod> newPeriods) {
+        this.followUpPeriods = newPeriods;
+    }
+
+    //-/***************************************************************************************
 // *    Title: <JSON serialization demo>
 // *    Code version: <20210307>
 // *    Availability: <https://github.com/stleary/JSON-java>
 // ***************************************************************************************/
-    // EFFECTS: returns patient as JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -156,11 +164,13 @@ public class Patient implements Writable {
         json.put("gender", gender);
         json.put("age", age);
         json.put("operation date", operationDate);
-        json.put("follow up period", followUpPeriods);
-        json.put("isFollowedList", isFollowedList);
-        json.put("followUpMarks", followUpMarks);
-        json.put("needFollowUpToday", needFollowUpToday);
-        json.put("trialCompleted", trialCompleted);
+
+        JSONArray followUpPeriodsJson = new JSONArray();
+        for (FollowUpPeriod period : followUpPeriods) {
+            followUpPeriodsJson.put(period.toJson());
+        }
+        json.put("followUpPeriods", followUpPeriodsJson);
+
         return json;
     }
 }

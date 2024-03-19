@@ -1,9 +1,12 @@
 package persistence;
 
 import model.ClinicalTrial;
+import model.FollowUpPeriod;
 import model.Patient;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -70,7 +73,27 @@ public class JsonReader {
         String gender = jsonObject.getString("gender");
         int age = jsonObject.getInt("age");
         LocalDate operationDate = LocalDate.parse(jsonObject.getString("operation date"));
+        JSONArray followUpPeriodsArray = jsonObject.getJSONArray("followUpPeriods");
+        ArrayList<FollowUpPeriod> followUpPeriods = getFollowUpPeriods(followUpPeriodsArray);
         Patient patient = new Patient(patientId, gender, age, operationDate);
+        patient.updateFollowUpPeriods(followUpPeriods);
         trial.addPatient(patient);
     }
+
+    // MODIFIES: patient
+    // EFFECTS: parses followup period from JSON object and adds it to patient
+    private static ArrayList<FollowUpPeriod> getFollowUpPeriods(JSONArray followUpPeriodsArray) {
+        ArrayList<FollowUpPeriod> followUpPeriods = new ArrayList<>();
+        for (Object json : followUpPeriodsArray) {
+            JSONObject nextPeriod = (JSONObject) json;
+            LocalDate startDate = LocalDate.parse(nextPeriod.getString("startDate"));
+            LocalDate endDate = LocalDate.parse(nextPeriod.getString("endDate"));
+            boolean isFollowed = nextPeriod.getBoolean("isFollowed");
+            FollowUpPeriod period = new FollowUpPeriod(startDate, endDate, isFollowed);
+            followUpPeriods.add(period);
+        }
+        return followUpPeriods;
+    }
+
+
 }
