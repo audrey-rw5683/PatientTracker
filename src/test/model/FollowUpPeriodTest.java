@@ -110,13 +110,13 @@ public class FollowUpPeriodTest {
 
     @Test
     public void testSetFollowed() {
-        periodFU7D.setFollowed();
+        periodFU7D.isFollowed();
         assertTrue(periodFU7D.checkIsFollowed());
-        periodFU1M.setFollowed();
+        periodFU1M.isFollowed();
         assertTrue(periodFU1M.checkIsFollowed());
-        periodFU6M.setFollowed();
+        periodFU6M.isFollowed();
         assertTrue(periodFU6M.checkIsFollowed());
-        periodFU1Y.setFollowed();
+        periodFU1Y.isFollowed();
         assertTrue(periodFU1Y.checkIsFollowed());
     }
 }

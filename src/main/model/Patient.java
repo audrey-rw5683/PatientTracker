@@ -84,7 +84,7 @@ public class Patient implements Writable {
     //MODIFIES: this
     //EFFECTS: choose from 1 to 4 in the console menu, set one period as followed
     public void markFollowed(int index) {
-        getFollowUpPeriods().get(index - 1).setFollowed();
+        getFollowUpPeriods().get(index - 1).isFollowed();
     }
 
 
@@ -101,12 +101,25 @@ public class Patient implements Writable {
         return null;
     }
 
+    //EFFECTS: generates a patient's all information
+    public String printPatient() {
+        StringBuilder result = new StringBuilder();
+        String id = "ID: " + getPatientId() + " ";
+        String age = "Age: " + getAge() + " ";
+        String gender = "\nGender: " + getGender() + " ";
+        String opdate = "Operation Date: " + getOperationDate() + " ";
+        String compelte = "\nTrial completed? " + isTrialCompleted() + " ";
+        String periods = "\nFollow-ups: \n" + printFollowUpPeriods() + " ";
+        result.append(id).append(age).append(gender).append(opdate).append(compelte).append(periods);
+        return result.toString();
+    }
+
 
     //EFFECTS: generates a patient's all follow-up periods
     public String printFollowUpPeriods() {
         StringBuilder result = new StringBuilder();
         for (FollowUpPeriod period : followUpPeriods) {
-            String str = period.printPeriod() + "\n";
+            String str =  period.printPeriod() + "\n";
             result.append(str);
         }
         return result.toString();
@@ -118,6 +131,10 @@ public class Patient implements Writable {
 
     public boolean isTrialCompleted() {
         return trialCompleted;
+    }
+
+    public void setTrialCompleted(boolean b) {
+        trialCompleted = b;
     }
 
     public ArrayList<FollowUpPeriod> getFollowUpPeriods() {
@@ -170,7 +187,7 @@ public class Patient implements Writable {
             followUpPeriodsJson.put(period.toJson());
         }
         json.put("followUpPeriods", followUpPeriodsJson);
-
+        json.put("trial completed", trialCompleted);
         return json;
     }
 }

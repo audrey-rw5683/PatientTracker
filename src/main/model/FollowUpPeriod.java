@@ -45,6 +45,8 @@ public class FollowUpPeriod implements Writable {
     }
 
     public FollowUpPeriod(LocalDate startDate, LocalDate endDate, boolean isFollowed) {
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.isFollowed = isFollowed;
     }
 
@@ -70,7 +72,7 @@ public class FollowUpPeriod implements Writable {
 
     //MODIFIES: this
     //EFFECTS: mark the period as followed
-    public void setFollowed() {
+    public void isFollowed() {
         isFollowed = true;
     }
 

@@ -42,12 +42,12 @@ public class PatientTracker {
         // p4 is after operation 500 days
         Patient p4 = new Patient("004", "M", 82, today.minusDays(500));
 
-        p2.getFollowUpPeriods().get(0).setFollowed();
-        p3.getFollowUpPeriods().get(0).setFollowed();
-        p3.getFollowUpPeriods().get(1).setFollowed();
-        p4.getFollowUpPeriods().get(0).setFollowed();
-        p4.getFollowUpPeriods().get(1).setFollowed();
-        p4.getFollowUpPeriods().get(2).setFollowed();
+        p2.getFollowUpPeriods().get(0).isFollowed();
+        p3.getFollowUpPeriods().get(0).isFollowed();
+        p3.getFollowUpPeriods().get(1).isFollowed();
+        p4.getFollowUpPeriods().get(0).isFollowed();
+        p4.getFollowUpPeriods().get(1).isFollowed();
+        p4.getFollowUpPeriods().get(2).isFollowed();
 
         currentTrial.getPatientList().add(p1);
         currentTrial.getPatientList().add(p2);

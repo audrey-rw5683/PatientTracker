@@ -59,13 +59,13 @@ public class PatientTest {
     public void testIsTrialCompleted() {
         assertFalse(patient1.isTrialCompleted());
         for (FollowUpPeriod period : patient1.getFollowUpPeriods()) {
-            period.setFollowed();
+            period.isFollowed();
         }
         patient1.checkTrialCompleted();
         assertTrue(patient1.isTrialCompleted());
         assertFalse(patient2.getFollowUpPeriods().get(0).checkIsFollowed());
         assertFalse(patient2.isTrialCompleted());
-        patient2.getFollowUpPeriods().get(1).setFollowed();
+        patient2.getFollowUpPeriods().get(1).isFollowed();
         assertFalse(patient2.isTrialCompleted());
     }
 
@@ -73,7 +73,7 @@ public class PatientTest {
     public void testIsTrialNotCompleted() {
         assertFalse(patient1.isTrialCompleted());
         for (int i = 0; i < patient1.getFollowUpPeriods().size() - 1; i++) {
-            patient1.getFollowUpPeriods().get(i).setFollowed();
+            patient1.getFollowUpPeriods().get(i).isFollowed();
         }
         patient1.checkTrialCompleted();
         assertFalse(patient2.isTrialCompleted());
@@ -82,7 +82,7 @@ public class PatientTest {
     @Test
     public void testCheckNeedFollowUpToday() {
         assertTrue(patient1.checkNeedFollowUpToday());
-        patient1.getCurrentPeriod().setFollowed();
+        patient1.getCurrentPeriod().isFollowed();
         assertFalse(patient1.checkNeedFollowUpToday());
         assertFalse(patient2.checkNeedFollowUpToday());
     }

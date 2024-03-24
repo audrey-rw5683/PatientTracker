@@ -101,13 +101,13 @@ public class ClinicalTrialTest {
         testTrial.addPatient(patient1);
         assertTrue(testTrial.getCompletedList().isEmpty());
         for (FollowUpPeriod period : patient1.getFollowUpPeriods()) {
-            period.setFollowed();
+            period.isFollowed();
         }
         patient1.checkTrialCompleted();
         assertFalse(testTrial.getCompletedList().isEmpty());
         assertEquals(1, testTrial.getCompletedNum());
         assertEquals(patient1, testTrial.getCompletedList().get(0));
-        patient2.getFollowUpPeriods().get(1).setFollowed();
+        patient2.getFollowUpPeriods().get(1).isFollowed();
         assertEquals(1, testTrial.getCompletedNum());
         assertEquals(patient1, testTrial.getCompletedList().get(0));
     }

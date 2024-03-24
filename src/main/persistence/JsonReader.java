@@ -75,8 +75,10 @@ public class JsonReader {
         LocalDate operationDate = LocalDate.parse(jsonObject.getString("operation date"));
         JSONArray followUpPeriodsArray = jsonObject.getJSONArray("followUpPeriods");
         ArrayList<FollowUpPeriod> followUpPeriods = getFollowUpPeriods(followUpPeriodsArray);
+        boolean complete = jsonObject.getBoolean("trial completed");
         Patient patient = new Patient(patientId, gender, age, operationDate);
         patient.updateFollowUpPeriods(followUpPeriods);
+        patient.setTrialCompleted(complete);
         trial.addPatient(patient);
     }
 
