@@ -70,6 +70,16 @@ public class PatientTest {
     }
 
     @Test
+    public void testPrintPatient() {
+        String result = patient1.printPatient();
+        assertEquals("ID: " + patient1.getPatientId()+ " Age: " + patient1.getAge() + " \n" +
+                "Gender: "+ patient1.getGender() + " Operation Date: " + today.minusDays(3) + " \n" +
+                "Trial completed? " + patient1.isTrialCompleted() + " \n" +
+                "Follow-ups: \n" +
+                patient1.printFollowUpPeriods() + " ",result);
+    }
+
+    @Test
     public void testIsTrialNotCompleted() {
         assertFalse(patient1.isTrialCompleted());
         for (int i = 0; i < patient1.getFollowUpPeriods().size() - 1; i++) {
