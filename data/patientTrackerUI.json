@@ -58,6 +58,64 @@
             ],
             "id": "003",
             "age": 37
+        },
+        {
+            "operation date": "2024-02-29",
+            "gender": "m",
+            "trial completed": false,
+            "followUpPeriods": [
+                {
+                    "endDate": "2024-03-07",
+                    "startDate": "2024-03-01",
+                    "isFollowed": false
+                },
+                {
+                    "endDate": "2024-04-06",
+                    "startDate": "2024-03-23",
+                    "isFollowed": false
+                },
+                {
+                    "endDate": "2024-09-26",
+                    "startDate": "2024-07-28",
+                    "isFollowed": false
+                },
+                {
+                    "endDate": "2025-03-25",
+                    "startDate": "2025-01-24",
+                    "isFollowed": false
+                }
+            ],
+            "id": "005",
+            "age": 63
+        },
+        {
+            "operation date": "2024-03-01",
+            "gender": "f",
+            "trial completed": false,
+            "followUpPeriods": [
+                {
+                    "endDate": "2024-03-08",
+                    "startDate": "2024-03-02",
+                    "isFollowed": false
+                },
+                {
+                    "endDate": "2024-04-07",
+                    "startDate": "2024-03-24",
+                    "isFollowed": false
+                },
+                {
+                    "endDate": "2024-09-27",
+                    "startDate": "2024-07-29",
+                    "isFollowed": false
+                },
+                {
+                    "endDate": "2025-03-26",
+                    "startDate": "2025-01-25",
+                    "isFollowed": false
+                }
+            ],
+            "id": "0025",
+            "age": 98
         }
     ]
 }
