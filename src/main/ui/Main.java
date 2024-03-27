@@ -2,7 +2,7 @@ package ui;
 
 import java.io.FileNotFoundException;
 
-// Represents the entry point of Patient Tracker Application
+// Represents the entry point of Patient Tracker console-based Application
 //-/***************************************************************************************
 // *    Title: <JSON serialization demo>
 // *    Code version: <20210307>
