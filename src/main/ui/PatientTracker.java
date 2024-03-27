@@ -250,11 +250,11 @@ public class PatientTracker {
         }
     }
 
-//-/***************************************************************************************
-// *    Title: <JSON serialization demo>
-// *    Code version: <20210307>
-// *    Availability: <https://github.com/stleary/JSON-java>
-// ***************************************************************************************/
+    //-/***************************************************************************************
+    // *    Title: <JSON serialization demo>
+    // *    Code version: <20210307>
+    // *    Availability: <https://github.com/stleary/JSON-java>
+    // ***************************************************************************************/
     // EFFECTS: saves the trial to file
     private void saveClinicalTrial() {
         try {
@@ -267,11 +267,11 @@ public class PatientTracker {
         }
     }
 
-//-/***************************************************************************************
-// *    Title: <JSON serialization demo>
-// *    Code version: <20210307>
-// *    Availability: <https://github.com/stleary/JSON-java>
-// ***************************************************************************************/
+    //-/***************************************************************************************
+    // *    Title: <JSON serialization demo>
+    // *    Code version: <20210307>
+    // *    Availability: <https://github.com/stleary/JSON-java>
+    // ***************************************************************************************/
     // MODIFIES: this
     // EFFECTS: loads trial from file
     private void loadClinicalTrial() {

@@ -44,6 +44,7 @@ public class FollowUpPeriod implements Writable {
         }
     }
 
+    //EFFECTS: makes a follow-up period with start date, end date and follow status
     public FollowUpPeriod(LocalDate startDate, LocalDate endDate, boolean isFollowed) {
         this.startDate = startDate;
         this.endDate = endDate;
@@ -76,13 +77,18 @@ public class FollowUpPeriod implements Writable {
         isFollowed = true;
     }
 
+    //-/***************************************************************************************
+    // *    Title: <JSON serialization demo>
+    // *    Code version: <20210307>
+    // *    Availability: <https://github.com/stleary/JSON-java>
+    // ***************************************************************************************/
+    //EFFECTS: creates JSONObject for a follow-up period
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("startDate", startDate.toString());
         json.put("endDate", endDate.toString());
         json.put("isFollowed", isFollowed);
-        // Include any other relevant information about the follow-up period
         return json;
     }
 }

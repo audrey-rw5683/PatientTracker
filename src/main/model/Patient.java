@@ -165,15 +165,16 @@ public class Patient implements Writable {
         return gender;
     }
 
-    public void updateFollowUpPeriods(ArrayList<FollowUpPeriod> newPeriods) {
+    public void setFollowUpPeriods(ArrayList<FollowUpPeriod> newPeriods) {
         this.followUpPeriods = newPeriods;
     }
 
     //-/***************************************************************************************
-// *    Title: <JSON serialization demo>
-// *    Code version: <20210307>
-// *    Availability: <https://github.com/stleary/JSON-java>
-// ***************************************************************************************/
+    // *    Title: <JSON serialization demo>
+    // *    Code version: <20210307>
+    // *    Availability: <https://github.com/stleary/JSON-java>
+    // ***************************************************************************************/
+    //EFFECTS: creates JSONObject for a patient
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

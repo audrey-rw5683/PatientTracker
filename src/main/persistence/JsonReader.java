@@ -6,7 +6,7 @@ import model.Patient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -77,7 +77,7 @@ public class JsonReader {
         ArrayList<FollowUpPeriod> followUpPeriods = getFollowUpPeriods(followUpPeriodsArray);
         boolean complete = jsonObject.getBoolean("trial completed");
         Patient patient = new Patient(patientId, gender, age, operationDate);
-        patient.updateFollowUpPeriods(followUpPeriods);
+        patient.setFollowUpPeriods(followUpPeriods);
         patient.setTrialCompleted(complete);
         trial.addPatient(patient);
     }
