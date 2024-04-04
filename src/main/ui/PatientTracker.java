@@ -33,26 +33,6 @@ public class PatientTracker {
     public void init() {
         today = LocalDate.now();
         this.currentTrial = new ClinicalTrial("currentTrial");
-        // p1 is after operation 3 days
-        Patient p1 = new Patient("001", "F", 28, today.minusDays(3));
-        // p2 is after operation 33 days
-        Patient p2 = new Patient("002", "F", 45, today.minusDays(33));
-        // p3 is after operation 180 days
-        Patient p3 = new Patient("003", "M", 37, today.minusDays(180));
-        // p4 is after operation 500 days
-        Patient p4 = new Patient("004", "M", 82, today.minusDays(500));
-
-        p2.getFollowUpPeriods().get(0).isFollowed();
-        p3.getFollowUpPeriods().get(0).isFollowed();
-        p3.getFollowUpPeriods().get(1).isFollowed();
-        p4.getFollowUpPeriods().get(0).isFollowed();
-        p4.getFollowUpPeriods().get(1).isFollowed();
-        p4.getFollowUpPeriods().get(2).isFollowed();
-
-        currentTrial.getPatientList().add(p1);
-        currentTrial.getPatientList().add(p2);
-        currentTrial.getPatientList().add(p3);
-        currentTrial.getPatientList().add(p4);
     }
 
     // MODIFIES: this

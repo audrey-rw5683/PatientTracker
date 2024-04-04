@@ -98,11 +98,6 @@ public class PatientTrackerUI extends JFrame implements ActionListener {
         printLogButton.setPreferredSize(buttonSize);
         printLogButton.addActionListener(this);
         logPanel.add(printLogButton);
-//        JButton loadButton = new JButton("Load your previous work");
-//        loadButton.setActionCommand("load");
-//        loadButton.setPreferredSize(buttonSize);
-//        loadButton.addActionListener(this);
-//        logPanel.add(loadButton);
         mainFrame.add(logPanel, BorderLayout.NORTH);
     }
 
