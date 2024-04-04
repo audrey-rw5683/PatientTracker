@@ -41,6 +41,21 @@ the data obtained is of higher quality, and the results of clinical trials are m
 - You can reload the state of my application by clicking the button labelled "Load your previous work".
 - You can quit the GUI by closing the frame.
 
+# Phase 4: Task 2
+- Wed Apr 03 11:07:31 PDT 2024
+- Loaded work
+- Wed Apr 03 11:07:31 PDT 2024
+- Added Patient: 001
+- Wed Apr 03 11:07:56 PDT 2024
+- Added Patient: 002
+- Wed Apr 03 11:07:58 PDT 2024
+- Showed all enrolled patients
+- Wed Apr 03 11:08:00 PDT 2024
+- Showed follow-up list
+- Wed Apr 03 11:08:05 PDT 2024
+- Saved work
+
 ## Citations
 - JSON serialization demo, Code version: <20210307>, Availability: <https://github.com/stleary/JSON-java>
 - splash.jpg Availability: <https://www.shutterstock.com/search/clinical-information-system>
+- AlarmSystem <https://github.students.ubc.ca/CPSC210/AlarmSystem>

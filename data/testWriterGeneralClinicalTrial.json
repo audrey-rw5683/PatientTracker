@@ -2,28 +2,28 @@
     "Clinical Trial": "currentTrial",
     "Patients": [
         {
-            "operation date": "2024-03-21",
+            "operation date": "2024-03-24",
             "gender": "F",
             "trial completed": false,
             "followUpPeriods": [
                 {
-                    "endDate": "2024-03-28",
-                    "startDate": "2024-03-22",
+                    "endDate": "2024-03-31",
+                    "startDate": "2024-03-25",
                     "isFollowed": false
                 },
                 {
-                    "endDate": "2024-04-27",
-                    "startDate": "2024-04-13",
+                    "endDate": "2024-04-30",
+                    "startDate": "2024-04-16",
                     "isFollowed": false
                 },
                 {
-                    "endDate": "2024-10-17",
-                    "startDate": "2024-08-18",
+                    "endDate": "2024-10-20",
+                    "startDate": "2024-08-21",
                     "isFollowed": false
                 },
                 {
-                    "endDate": "2025-04-15",
-                    "startDate": "2025-02-14",
+                    "endDate": "2025-04-18",
+                    "startDate": "2025-02-17",
                     "isFollowed": false
                 }
             ],
@@ -31,28 +31,28 @@
             "age": 28
         },
         {
-            "operation date": "2023-09-26",
+            "operation date": "2023-09-29",
             "gender": "M",
             "trial completed": false,
             "followUpPeriods": [
                 {
-                    "endDate": "2023-10-03",
-                    "startDate": "2023-09-27",
+                    "endDate": "2023-10-06",
+                    "startDate": "2023-09-30",
                     "isFollowed": false
                 },
                 {
-                    "endDate": "2023-11-02",
-                    "startDate": "2023-10-19",
+                    "endDate": "2023-11-05",
+                    "startDate": "2023-10-22",
                     "isFollowed": false
                 },
                 {
-                    "endDate": "2024-04-23",
-                    "startDate": "2024-02-23",
+                    "endDate": "2024-04-26",
+                    "startDate": "2024-02-26",
                     "isFollowed": false
                 },
                 {
-                    "endDate": "2024-10-20",
-                    "startDate": "2024-08-21",
+                    "endDate": "2024-10-23",
+                    "startDate": "2024-08-24",
                     "isFollowed": false
                 }
             ],

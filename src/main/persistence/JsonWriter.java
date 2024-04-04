@@ -2,6 +2,8 @@ package persistence;
 
 import model.ClinicalTrial;
 
+import model.Event;
+import model.EventLog;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -35,6 +37,7 @@ public class JsonWriter {
     // EFFECTS: writes JSON representation of trial to file
     public void write(ClinicalTrial trial) {
         JSONObject json = trial.toJson();
+        EventLog.getInstance().logEvent(new Event("Saved work"));
         saveToFile(json.toString(TAB));
     }
 

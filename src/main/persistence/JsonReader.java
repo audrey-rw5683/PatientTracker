@@ -1,8 +1,6 @@
 package persistence;
 
-import model.ClinicalTrial;
-import model.FollowUpPeriod;
-import model.Patient;
+import model.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.ArrayList;
@@ -34,6 +32,7 @@ public class JsonReader {
     public ClinicalTrial read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
+        EventLog.getInstance().logEvent(new Event("Loaded work"));
         return parseClinicalTrial(jsonObject);
     }
 

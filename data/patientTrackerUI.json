@@ -2,33 +2,62 @@
     "Clinical Trial": "My Clinical Trial",
     "Patients": [
         {
-            "operation date": "2024-03-10",
+            "operation date": "2024-03-20",
             "gender": "F",
             "trial completed": false,
             "followUpPeriods": [
                 {
-                    "endDate": "2024-03-17",
-                    "startDate": "2024-03-11",
+                    "endDate": "2024-03-27",
+                    "startDate": "2024-03-21",
                     "isFollowed": false
                 },
                 {
-                    "endDate": "2024-04-16",
-                    "startDate": "2024-04-02",
+                    "endDate": "2024-04-26",
+                    "startDate": "2024-04-12",
                     "isFollowed": false
                 },
                 {
-                    "endDate": "2024-10-06",
-                    "startDate": "2024-08-07",
+                    "endDate": "2024-10-16",
+                    "startDate": "2024-08-17",
                     "isFollowed": false
                 },
                 {
-                    "endDate": "2025-04-04",
-                    "startDate": "2025-02-03",
+                    "endDate": "2025-04-14",
+                    "startDate": "2025-02-13",
                     "isFollowed": false
                 }
             ],
             "id": "001",
-            "age": 69
+            "age": 56
+        },
+        {
+            "operation date": "2024-04-01",
+            "gender": "M",
+            "trial completed": false,
+            "followUpPeriods": [
+                {
+                    "endDate": "2024-04-08",
+                    "startDate": "2024-04-02",
+                    "isFollowed": false
+                },
+                {
+                    "endDate": "2024-05-08",
+                    "startDate": "2024-04-24",
+                    "isFollowed": false
+                },
+                {
+                    "endDate": "2024-10-28",
+                    "startDate": "2024-08-29",
+                    "isFollowed": false
+                },
+                {
+                    "endDate": "2025-04-26",
+                    "startDate": "2025-02-25",
+                    "isFollowed": false
+                }
+            ],
+            "id": "002",
+            "age": 98
         }
     ]
 }

@@ -1,6 +1,8 @@
 package ui;
 
 import model.ClinicalTrial;
+import model.Event;
+import model.EventLog;
 import model.Patient;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -9,6 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -43,7 +47,6 @@ public class PatientTrackerUI extends JFrame implements ActionListener {
     public PatientTrackerUI() {
         mainFrame = new JFrame("Patient Tracking System");
         clinicalTrial = new ClinicalTrial("My Clinical Trial");
-        mainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         mainFrame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         buttonSize = new Dimension(BUTTON_WIDTH,BUTTON_HEIGHT);
         elementSize = new Dimension(ELEMENT_WIDTH,ELEMENT_HEIGHT);
@@ -51,11 +54,29 @@ public class PatientTrackerUI extends JFrame implements ActionListener {
         createAddPatientPanel();
         createDisplayPanel();
         createSaveLoadPanel();
+        createLogPanel();
 
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
+        mainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        mainFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.out.println(printToConsole(EventLog.getInstance()));
+                e.getWindow().dispose();
+            }
+        });
+    }
+
+    // EFFECTS: prints log to console when close the window
+    private String printToConsole(EventLog eventLog) {
+        StringBuilder sb = new StringBuilder();
+        for (Event event : eventLog) {
+            sb.append("\n").append(event.toString());
+        }
+        return sb.toString();
     }
 
     // MODIFIES: this
@@ -65,6 +86,24 @@ public class PatientTrackerUI extends JFrame implements ActionListener {
         createShowPatientsPanel();
         createFollowupPanel();
         mainFrame.add(displayPanel,BorderLayout.CENTER);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: builds an area for "print log" button
+    private void createLogPanel() {
+        JPanel logPanel = new JPanel(new GridLayout(1, 2, 20, 10));
+        logPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        JButton printLogButton = new JButton("Print Log");
+        printLogButton.setActionCommand("printLog");
+        printLogButton.setPreferredSize(buttonSize);
+        printLogButton.addActionListener(this);
+        logPanel.add(printLogButton);
+//        JButton loadButton = new JButton("Load your previous work");
+//        loadButton.setActionCommand("load");
+//        loadButton.setPreferredSize(buttonSize);
+//        loadButton.addActionListener(this);
+//        logPanel.add(loadButton);
+        mainFrame.add(logPanel, BorderLayout.NORTH);
     }
 
     // MODIFIES: this
@@ -253,7 +292,15 @@ public class PatientTrackerUI extends JFrame implements ActionListener {
             saveWork();
         } else if (e.getActionCommand().equals("load")) {
             loadWork();
+        } else if (e.getActionCommand().equals("printLog")) {
+            printLog();
         }
+    }
+
+    // EFFECTS: produces log
+    private void printLog() {
+        LogScreenUI logScreen = new LogScreenUI();
+        logScreen.printLog(EventLog.getInstance());
     }
 
     //-/***************************************************************************************

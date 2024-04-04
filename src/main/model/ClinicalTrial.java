@@ -23,6 +23,7 @@ public class ClinicalTrial implements Writable {
     // same patient cannot be added twice
     public void addPatient(Patient patient) {
         if (null == findPatient(patient.getPatientId())) {
+            EventLog.getInstance().logEvent(new Event("Added Patient: " + patient.getPatientId()));
             patientList.add(patient);
         }
     }
@@ -56,6 +57,7 @@ public class ClinicalTrial implements Writable {
                 followUpList.add(p);
             }
         }
+        EventLog.getInstance().logEvent(new Event("Showed follow-up list"));
         return followUpList;
     }
 
@@ -80,6 +82,7 @@ public class ClinicalTrial implements Writable {
 
     //EFFECTS: generates a list of patients who enrolled in the trial
     public ArrayList<Patient> getPatientList() {
+        EventLog.getInstance().logEvent(new Event("Showed all enrolled patients"));
         return patientList;
     }
 
