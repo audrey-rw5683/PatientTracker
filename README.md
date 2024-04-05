@@ -54,6 +54,12 @@ the data obtained is of higher quality, and the results of clinical trials are m
 - Showed follow-up list
 - Wed Apr 03 11:08:05 PDT 2024
 - Saved work
+- 
+# Phase 4: Task 3
+If I had the time, what I would most like to improve is the data structures. 
+Because during phase 1, we hadn't learned about sets and hashmaps yet. But when I learned about them, I realized that they would be more suitable for my project. 
+I would use Patient as the key, and the list of follow-up periods is the value of each key.
+With hashmap, I can retrieve data more quickly, and if the patients in the project are stored as a set, I wouldn't have to worry about duplicate elements.
 
 ## Citations
 - JSON serialization demo, Code version: <20210307>, Availability: <https://github.com/stleary/JSON-java>
