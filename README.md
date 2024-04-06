@@ -54,7 +54,8 @@ the data obtained is of higher quality, and the results of clinical trials are m
 - Showed follow-up list
 - Wed Apr 03 11:08:05 PDT 2024
 - Saved work
-- 
+
+
 # Phase 4: Task 3
 If I had the time, what I would most like to improve is the data structures. 
 Because during phase 1, we hadn't learned about sets and hashmaps yet. But when I learned about them, I realized that they would be more suitable for my project. 
